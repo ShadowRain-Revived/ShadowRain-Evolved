@@ -87,30 +87,6 @@ Echo Press any key to terminate booting into ShadowRain
 Pause>Nul
 Exit
 
-:NO_EXIST_ENCDEC
-Color 0C
-Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Echo Error : File Missing - Encdec.bat
-Echo            - Please locate the missing file and place it in this directory:
-Echo                  - %cd%\
-Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Echo.
-Echo Press any key to terminate booting into ShadowRain
-Pause>Nul
-Exit
-
-:NO_EXIST_UACSYS
-Color 0C
-Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Echo Error : File Missing - UacSys.bat
-Echo            - Please locate the missing file and place it in this directory:
-Echo                  - %cd%\
-Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Echo.
-Echo Press any key to terminate booting into ShadowRain
-Pause>Nul
-Exit
-
 :NO_EXIST_001
 Color 0C
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
