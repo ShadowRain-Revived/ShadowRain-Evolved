@@ -1,6 +1,6 @@
 @Echo off
 If "%1"=="" Goto NO_PARAM
-If "%1"=="-mod" Goto Entry
+If "%1"=="-z1" Goto Entry
 Exit
 
 :NO_PARAM
@@ -24,7 +24,7 @@ Goto Entry
 
 :Refresh
 Echo Console Refreshed.
-modules\0.0.1.bat
+modules\0.0.1.bat -z1
 
 :Logout
 Startup.bat
