@@ -1,7 +1,7 @@
 @Echo off
 SetLocal EnableExtensions EnableDelayedExpansion
 If "%1"=="" Goto NO_PARAM
-If "%1"=="-z2" Goto Exec
+If "%1"=="-z3" Goto Exec
 Exit
 
 :NO_PARAM
@@ -25,7 +25,7 @@ If "%Command%"=="clear" Goto Clear
 If "%Command%"=="help" Goto Help
 If "%Command%"=="commands" Goto Help
 If "%Command%"=="refresh" Goto Refresh
-If "%Command%"=="logout" Goto Logout
+If "%Command%"=="dir" Goto Ls
 If "%Command%"=="ls" Goto Ls
 If "%Command%"=="cd" Goto Cd
 If "%Command%"=="root" Goto Root
@@ -39,6 +39,8 @@ If "%Command%"=="mkfile" Goto MkFile
 If "%Command%"=="delfile" Goto DelFile
 If "%Command%"=="date" Goto Date
 If "%Command%"=="log" Goto Log
+If "%Command%"=="sysinfo" Goto SysInfo
+If "%Command%"=="chpwd" Goto PWDChange
 Set Command=
 Goto Entry
 
@@ -46,12 +48,8 @@ Goto Entry
 Set currentDir=%cd%
 Cd %shadowDir%
 Echo Console Refreshed.
-modules\0.0.2.bat -z2
+modules\0.0.3.bat -z3
 Set Command=
-
-:Logout
-Cd %shadowDir%
-Startup.bat
 
 :Ls
 Dir
@@ -60,7 +58,12 @@ Goto Entry
 
 :Cd
 Set /P Directory="What directory? "
-Cd %Directory%
+If Not Exist "%Directory%" (
+	Echo This Directory does not exist.
+	Set Command=
+	Goto Entry
+)
+Cd "%Directory%"
 Set Command=
 Goto Entry
 
@@ -80,8 +83,7 @@ Echo :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo ShadowRain Command List:
 Echo.
 Echo  - clear (Alias : cls) -- Clears the Console Window
-Echo  - refresh -- Refreshes the Console Window (For Updates - Mainly a dev command :P)
-Echo  - logout -- Logout of ShadowRain back to the Startup Menu
+Echo  - refresh -- Refreshes the Console Window (For Updates - Mainly a dev command :
 Echo  - root -- Takes you to the directory of these files (If you're in another directory)
 Echo  - ls -- Shows the files in the directory
 Echo  - cd -- Allows you to change directory
@@ -94,6 +96,8 @@ Echo  - mkfile -- Allows you to make a file inside a directory (must specify ext
 Echo  - delfile -- Allows you to delete a file (must specify ext)
 Echo  - date -- Displays the system date
 Echo  - log -- Displays the system time and date
+Echo  - sysinfo -- Displays the system information
+Echo  - chpwd -- Allows you to change your password
 Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
@@ -101,30 +105,30 @@ Set Command=
 Goto Entry
 
 :Time
-Echo The System Time is [%time%].
+Echo The System Time is [%Time%].
 Set Command=
 Goto Entry
 
 :MkDir
-Set /P DIR="Name your desired directory: "
-Mkdir %DIR%
-Echo '%DIR%' has been made.
+Set /P Dir="Name your desired directory: "
+Mkdir %Dir%
+Echo '%Dir%' has been made.
 Set Command=
 Goto Entry
 
 :RD
 Set /P REDIR="Which directory do you wish to delete?: "
-If Not Exist %REDIR% (
+If Not Exist %reDir% (
 	Echo This directory does not exist.
 	Set Command=
 	Goto Entry
 )
-Set /P CONFIRM="Are you sure you want to delete '%REDIR%?' (yes/no): "
-If "%CONFIRM%"=="yes" (
-	Rd /S /Q %REDIR%
-	Echo '%REDIR%' has been deleted.
+Set /P Confirm="Are you sure you want to delete '%reDir%?' (yes/no): "
+If "%Confirm%"=="yes" (
+	Rd /S /Q %reDir%
+	Echo '%reDir%' has been deleted.
 )
-If Not "%CONFIRM%"=="yes" If Not "%CONFIRM%"=="no" (
+If Not "%Confirm%"=="yes" If Not "%Confirm%"=="no" (
 	Echo Please answer yes or no only.
 )
 Set Command=
@@ -147,41 +151,40 @@ Set Command=
 Goto Entry
 
 :MkFile
-Set /P Title="Enter a title (Specify ext): "
-Set /P Text="Write here: "
-If Exist %TITLE% Echo This file already exists.
+Set /P Title="Enter a title for your file (Specify ext): "
+Set /P Text="Write your text here: "
+If Exist %Title% Echo This file already exists.
     
-If Not Exist %TITLE% (
-	Echo %TEXT% > %Title%
+If Not Exist %Title% (
+	Echo %Text% > %Title%
 	Echo '%Title%' has been created.
 )
 Set Command=
 Goto Entry
 
 :DelFile
-Set /P ASK="Which file do you want to delete?: "
-If Not Exist %ASK% (
-	Echo '%ASK%' does not exist.
+Set /P DLFile="Which file do you want to delete?: "
+If Not Exist %DLFile% (
+	Echo '%DLFile%' does not exist.
 	Set Command=
 	Goto Entry
 )
-If Exist %ASK%\* (
-    Echo '%ASK%' is a directory. Use mkdir
+If Exist %DLFile%\* (
+    Echo '%DLFile%' is a directory. Use mkdir
     Set Command=
     Goto Entry
 )
-
-Set /P YN="Do you really want to delete '%ASK%'? (yes/no): "
-If "%YN%"=="yes" (
-	Del /Q %ASK%
+Set /P Response="Do you really want to delete '%DLFile%'? (yes/no): "
+If "%Response%"=="yes" (
+	Del /Q %DLFile%
 	Set Command=
 	Goto Entry
 )  
-If "%YN%"=="no" (
+If "%Response%"=="no" (
 	Set Command=
 	Goto Entry
 )
-If Not "%YN%"=="yes" If Not "%YN%"=="no" (
+If Not "%Response%"=="yes" If Not "%Response%"=="no" (
 	Echo Please answer yes or no only.
 	Set Command=
 	Goto Entry
@@ -190,13 +193,31 @@ Set Command=
 Goto Entry
 
 :Date
-Echo Today's date is [%date%]
+Echo Today's date is [%Date%]
 Set Command=
 Goto Entry
 
 :Log
 Echo.
-Echo %date% %time%
+Echo %Date% %Time%
 Echo.
+Set Command=
+Goto Entry
+
+:SysInfo
+Echo.
+Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Echo You are currently logged in as "%User%"
+Echo Version: [ 0.0.3 ] - Release: [ Alpha ]
+Echo.
+Echo New updates here: [ https://github.com/ShadowRain-Revived/ShadowRain ] 
+Echo For information join: [ https://discord.gg/t4f3MXA ]
+Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Echo.
+Set Command=
+Goto Entry
+
+:PWDChange
+UacSys.bat -chpwd
 Set Command=
 Goto Entry
