@@ -1,6 +1,6 @@
 This is ShadowRain - A gimmick DoS operating system developed in Batch (Meaning it can only run alongside Windows)
 
-==================================================================================================================
+===========================================================================================================
 Each File Serves a different function, Of which can be edited to customize ShadowRain in any way.
 
 - Startup.bat -> Handles File Searches and gives parameters to other files.
