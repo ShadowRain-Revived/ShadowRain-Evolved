@@ -24,7 +24,7 @@ Exit
 UacSys.bat -mkusr
 
 :AUTHENTICATE
-UacSys.bat -auth %User%
+UacSys.bat -auth !User!
 
 :PUSHUSER
 Goto 0.0.3
@@ -56,7 +56,7 @@ CommandEngine.bat -v 0.0.2
 Exit
 
 :0.0.3
-Title ShadowRain - System [Version : 0.0.3] [Logged into system as : %User%]
+Title ShadowRain - System [Version : 0.0.3] [Logged into system as : !User!]
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
 Echo -- Press any key to boot into ShadowRain - Version 0.0.3 (Build Date: 14/01/18) --

@@ -21,11 +21,11 @@ Echo -- Unable to run file - No parameter is defined, Returning to boot menu.
 Exit
 
 :INVALID_VALUE
-If "%Version%"=="" Set "Version=UNDEFINED"
-If "%Version%"=="0.0.1" cmd /k Startup.bat -s
-If "%Version%"=="0.0.2" cmd /k Startup.bat -s
-If "%Version%"=="0.0.3" cmd /k Startup.bat -s
-Echo "%Version%" - This is not a valid version of ShadowRain.
+If "!Version!"=="" Set "Version=UNDEFINED"
+If "!Version!"=="0.0.1" cmd /k Startup.bat -s
+If "!Version!"=="0.0.2" cmd /k Startup.bat -s
+If "!Version!"=="0.0.3" cmd /k Startup.bat -s
+Echo "!Version!" - This is not a valid version of ShadowRain.
 Echo.
 Echo Press any key to return to the ShadowRain boot menu.
 Pause>Nul
@@ -123,7 +123,7 @@ Exit
 Cls
 Color 0C
 Echo.
-Echo -- '%User%' is not a user on the system. --
+Echo -- '!User!' is not a user on the system. --
 Echo.
 Pause>Nul
 Exit

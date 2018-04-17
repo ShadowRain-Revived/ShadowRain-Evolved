@@ -11,46 +11,46 @@ Exit
 
 :Exec
 Set shadowDir=%cd%
-Cd %currentDir%>Nul
+Cd !currentDir!>Nul
 Set Command=
 Goto Entry
 Exit
 
 :Entry
 Set /P Command="<%cd%> (~)> "
-If "%Command%"=="" Goto Entry
-If "%Command%"=="""" Goto Entry
-If "%Command%"=="cls" Goto Clear
-If "%Command%"=="clear" Goto Clear
-If "%Command%"=="help" Goto Help
-If "%Command%"=="commands" Goto Help
-If "%Command%"=="refresh" Goto Refresh
-If "%Command%"=="logout" Goto Logout
-If "%Command%"=="ls" Goto Ls
-If "%Command%"=="cd" Goto Cd
-If "%Command%"=="root" Goto Root
-If "%Command%"=="time" Goto Time
-If "%Command%"=="mkdir" Goto MkDir
-If "%Command%"=="md" Goto Mkdir
-If "%Command%"=="rd" Goto Rd
-If "%Command%"=="rmdir" Goto Rd
-If "%Command%"=="color" Goto Color
-If "%Command%"=="mkfile" Goto MkFile
-If "%Command%"=="delfile" Goto DelFile
-If "%Command%"=="date" Goto Date
-If "%Command%"=="log" Goto Log
+If "!Command!"=="" Goto Entry
+If "!Command!"=="""" Goto Entry
+If "!Command!"=="cls" Goto Clear
+If "!Command!"=="clear" Goto Clear
+If "!Command!"=="help" Goto Help
+If "!Command!"=="commands" Goto Help
+If "!Command!"=="refresh" Goto Refresh
+If "!Command!"=="logout" Goto Logout
+If "!Command!"=="ls" Goto Ls
+If "!Command!"=="cd" Goto Cd
+If "!Command!"=="root" Goto Root
+If "!Command!"=="time" Goto Time
+If "!Command!"=="mkdir" Goto MkDir
+If "!Command!"=="md" Goto Mkdir
+If "!Command!"=="rd" Goto Rd
+If "!Command!"=="rmdir" Goto Rd
+If "!Command!"=="color" Goto Color
+If "!Command!"=="mkfile" Goto MkFile
+If "!Command!"=="delfile" Goto DelFile
+If "!Command!"=="date" Goto Date
+If "!Command!"=="log" Goto Log
 Set Command=
 Goto Entry
 
 :Refresh
 Set currentDir=%cd%
-Cd %shadowDir%
+Cd !shadowDir!
 Echo Console Refreshed.
 modules\0.0.2.bat -z2
 Set Command=
 
 :Logout
-Cd %shadowDir%
+Cd !shadowDir!
 Startup.bat
 
 :Ls
@@ -60,12 +60,12 @@ Goto Entry
 
 :Cd
 Set /P Directory="What directory? "
-Cd %Directory%
+Cd !Directory!
 Set Command=
 Goto Entry
 
 :Root
-Cd %shadowDir%
+Cd !shadowDir!
 Set Command=
 Goto Entry
 
@@ -107,24 +107,24 @@ Goto Entry
 
 :MkDir
 Set /P DIR="Name your desired directory: "
-Mkdir %DIR%
-Echo '%DIR%' has been made.
+Mkdir !Dir!
+Echo '!Dir!' has been made.
 Set Command=
 Goto Entry
 
 :RD
 Set /P REDIR="Which directory do you wish to delete?: "
-If Not Exist %REDIR% (
+If Not Exist !reDir! (
 	Echo This directory does not exist.
 	Set Command=
 	Goto Entry
 )
-Set /P CONFIRM="Are you sure you want to delete '%REDIR%?' (yes/no): "
-If "%CONFIRM%"=="yes" (
-	Rd /S /Q %REDIR%
-	Echo '%REDIR%' has been deleted.
+Set /P CONFIRM="Are you sure you want to delete '!reDir!?' (yes/no): "
+If "!Confirm!"=="yes" (
+	Rd /S /Q !reDir!
+	Echo '!reDir!' has been deleted.
 )
-If Not "%CONFIRM%"=="yes" If Not "%CONFIRM%"=="no" (
+If Not "!Confirm!"=="yes" If Not "!Confirm!"=="no" (
 	Echo Please answer yes or no only.
 )
 Set Command=
@@ -142,46 +142,46 @@ Echo 6 = Yellow      E = Light Yellow
 Echo 7 = White       F = Bright White
 Echo.
 Set /P Col="Pick a color: "
-Color %Col%
+Color !Col!
 Set Command=
 Goto Entry
 
 :MkFile
 Set /P Title="Enter a title (Specify ext): "
 Set /P Text="Write here: "
-If Exist %TITLE% Echo This file already exists.
+If Exist !Title! Echo This file already exists.
     
-If Not Exist %TITLE% (
-	Echo %TEXT% > %Title%
-	Echo '%Title%' has been created.
+If Not Exist !Title! (
+	Echo !Text! > !Title!
+	Echo '!Title!' has been created.
 )
 Set Command=
 Goto Entry
 
 :DelFile
 Set /P ASK="Which file do you want to delete?: "
-If Not Exist %ASK% (
-	Echo '%ASK%' does not exist.
+If Not Exist !Ask! (
+	Echo '!Ask!' does not exist.
 	Set Command=
 	Goto Entry
 )
-If Exist %ASK%\* (
-    Echo '%ASK%' is a directory. Use mkdir
+If Exist !Ask!\* (
+    Echo '!Ask!' is a directory. Use mkdir
     Set Command=
     Goto Entry
 )
 
-Set /P YN="Do you really want to delete '%ASK%'? (yes/no): "
-If "%YN%"=="yes" (
-	Del /Q %ASK%
+Set /P YN="Do you really want to delete '!Ask!'? (yes/no): "
+If "!YN!"=="yes" (
+	Del /Q !Ask!
 	Set Command=
 	Goto Entry
 )  
-If "%YN%"=="no" (
+If "!YN!"=="no" (
 	Set Command=
 	Goto Entry
 )
-If Not "%YN%"=="yes" If Not "%YN%"=="no" (
+If Not "!YN!"=="yes" If Not "!YN!"=="no" (
 	Echo Please answer yes or no only.
 	Set Command=
 	Goto Entry

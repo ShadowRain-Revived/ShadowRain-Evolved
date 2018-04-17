@@ -1,6 +1,6 @@
 @Echo off
 If "%1"=="" Goto NO_PARAM
-If "%1"=="-z1" Goto Entry
+If "%1"=="-mod" Goto Entry
 Exit
 
 :NO_PARAM
@@ -10,12 +10,12 @@ Exit
 
 :Entry
 Set /P Command="<%cd%> (~)> "
-If "%Command%"=="" Goto Entry
-If "%Command%"=="""" Goto Entry
-If "%Command%"=="test" Goto Test
-If "%Command%"=="refresh" Goto Refresh
-If "%Command%"=="logout" Goto Logout
-If "%Command%"=="ls" Goto Ls
+If "!Command!"=="" Goto Entry
+If "!Command!"=="""" Goto Entry
+If "!Command!"=="test" Goto Test
+If "!Command!"=="refresh" Goto Refresh
+If "!Command!"=="logout" Goto Logout
+If "!Command!"=="ls" Goto Ls
 Goto Entry
 
 :Test
@@ -24,7 +24,7 @@ Goto Entry
 
 :Refresh
 Echo Console Refreshed.
-modules\0.0.1.bat -z1
+modules\0.0.1.bat
 
 :Logout
 Startup.bat

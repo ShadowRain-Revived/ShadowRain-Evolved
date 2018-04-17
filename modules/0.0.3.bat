@@ -11,42 +11,42 @@ Exit
 
 :Exec
 Set shadowDir=%cd%
-Cd %currentDir%>Nul
+Cd !currentDir!>Nul
 Set Command=
 Goto Entry
 Exit
 
 :Entry
 Set /P Command="<%cd%> (~)> "
-If "%Command%"=="" Goto Entry
-If "%Command%"=="""" Goto Entry
-If "%Command%"=="cls" Goto Clear
-If "%Command%"=="clear" Goto Clear
-If "%Command%"=="help" Goto Help
-If "%Command%"=="commands" Goto Help
-If "%Command%"=="refresh" Goto Refresh
-If "%Command%"=="dir" Goto Ls
-If "%Command%"=="ls" Goto Ls
-If "%Command%"=="cd" Goto Cd
-If "%Command%"=="root" Goto Root
-If "%Command%"=="time" Goto Time
-If "%Command%"=="mkdir" Goto MkDir
-If "%Command%"=="md" Goto Mkdir
-If "%Command%"=="rd" Goto Rd
-If "%Command%"=="rmdir" Goto Rd
-If "%Command%"=="color" Goto Color
-If "%Command%"=="mkfile" Goto MkFile
-If "%Command%"=="delfile" Goto DelFile
-If "%Command%"=="date" Goto Date
-If "%Command%"=="log" Goto Log
-If "%Command%"=="sysinfo" Goto SysInfo
-If "%Command%"=="chpwd" Goto PWDChange
+If "!Command!"=="" Goto Entry
+If "!Command!"=="""" Goto Entry
+If "!Command!"=="cls" Goto Clear
+If "!Command!"=="clear" Goto Clear
+If "!Command!"=="help" Goto Help
+If "!Command!"=="commands" Goto Help
+If "!Command!"=="refresh" Goto Refresh
+If "!Command!"=="dir" Goto Ls
+If "!Command!"=="ls" Goto Ls
+If "!Command!"=="cd" Goto Cd
+If "!Command!"=="root" Goto Root
+If "!Command!"=="time" Goto Time
+If "!Command!"=="mkdir" Goto MkDir
+If "!Command!"=="md" Goto Mkdir
+If "!Command!"=="rd" Goto Rd
+If "!Command!"=="rmdir" Goto Rd
+If "!Command!"=="color" Goto Color
+If "!Command!"=="mkfile" Goto MkFile
+If "!Command!"=="delfile" Goto DelFile
+If "!Command!"=="date" Goto Date
+If "!Command!"=="log" Goto Log
+If "!Command!"=="sysinfo" Goto SysInfo
+If "!Command!"=="chpwd" Goto PWDChange
 Set Command=
 Goto Entry
 
 :Refresh
 Set currentDir=%cd%
-Cd %shadowDir%
+Cd !shadowDir!
 Echo Console Refreshed.
 modules\0.0.3.bat -z3
 Set Command=
@@ -58,17 +58,17 @@ Goto Entry
 
 :Cd
 Set /P Directory="What directory? "
-If Not Exist "%Directory%" (
+If Not Exist "!Directory!" (
 	Echo This Directory does not exist.
 	Set Command=
 	Goto Entry
 )
-Cd "%Directory%"
+Cd "!Directory!"
 Set Command=
 Goto Entry
 
 :Root
-Cd %shadowDir%
+Cd !shadowDir!
 Set Command=
 Goto Entry
 
@@ -111,24 +111,24 @@ Goto Entry
 
 :MkDir
 Set /P Dir="Name your desired directory: "
-Mkdir %Dir%
-Echo '%Dir%' has been made.
+Mkdir !Dir!
+Echo '!Dir!' has been made.
 Set Command=
 Goto Entry
 
 :RD
 Set /P REDIR="Which directory do you wish to delete?: "
-If Not Exist %reDir% (
+If Not Exist !reDir! (
 	Echo This directory does not exist.
 	Set Command=
 	Goto Entry
 )
-Set /P Confirm="Are you sure you want to delete '%reDir%?' (yes/no): "
-If "%Confirm%"=="yes" (
-	Rd /S /Q %reDir%
-	Echo '%reDir%' has been deleted.
+Set /P Confirm="Are you sure you want to delete '!reDir!?' (yes/no): "
+If "!Confirm!"=="yes" (
+	Rd /S /Q !reDir!
+	Echo '!reDir!' has been deleted.
 )
-If Not "%Confirm%"=="yes" If Not "%Confirm%"=="no" (
+If Not "!Confirm!"=="yes" If Not "!Confirm!"=="no" (
 	Echo Please answer yes or no only.
 )
 Set Command=
@@ -146,45 +146,45 @@ Echo 6 = Yellow      E = Light Yellow
 Echo 7 = White       F = Bright White
 Echo.
 Set /P Col="Pick a color: "
-Color %Col%
+Color !Col!
 Set Command=
 Goto Entry
 
 :MkFile
 Set /P Title="Enter a title for your file (Specify ext): "
 Set /P Text="Write your text here: "
-If Exist %Title% Echo This file already exists.
+If Exist !Title! Echo This file already exists.
     
-If Not Exist %Title% (
-	Echo %Text% > %Title%
-	Echo '%Title%' has been created.
+If Not Exist !Title! (
+	Echo !Text! > !Title!
+	Echo '!Title!' has been created.
 )
 Set Command=
 Goto Entry
 
 :DelFile
 Set /P DLFile="Which file do you want to delete?: "
-If Not Exist %DLFile% (
-	Echo '%DLFile%' does not exist.
+If Not Exist !DLFile! (
+	Echo '!DLFile!' does not exist.
 	Set Command=
 	Goto Entry
 )
-If Exist %DLFile%\* (
-    Echo '%DLFile%' is a directory. Use mkdir
+If Exist !DLFile!\* (
+    Echo '!DLFile!' is a directory. Use mkdir
     Set Command=
     Goto Entry
 )
-Set /P Response="Do you really want to delete '%DLFile%'? (yes/no): "
-If "%Response%"=="yes" (
-	Del /Q %DLFile%
+Set /P Response="Do you really want to delete '!DLFile!'? (yes/no): "
+If "!Response!"=="yes" (
+	Del /Q !DLFile!
 	Set Command=
 	Goto Entry
 )  
-If "%Response%"=="no" (
+If "!Response!"=="no" (
 	Set Command=
 	Goto Entry
 )
-If Not "%Response%"=="yes" If Not "%Response%"=="no" (
+If Not "!Response!"=="yes" If Not "!Response!"=="no" (
 	Echo Please answer yes or no only.
 	Set Command=
 	Goto Entry
@@ -207,11 +207,10 @@ Goto Entry
 :SysInfo
 Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Echo You are currently logged in as "%User%"
-Echo Version: [ 0.0.3 ] - Release: [ Alpha ]
-Echo.
-Echo New updates here: [ https://github.com/ShadowRain-Revived/ShadowRain ] 
-Echo For information join: [ https://discord.gg/t4f3MXA ]
+Echo You are logged in as !User!
+Echo System: ShadowRain
+Echo Version: 0.0.3
+Echo You are currently up to date
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
 Set Command=
