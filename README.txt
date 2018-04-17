@@ -13,3 +13,11 @@ Each File Serves a different function, Of which can be edited to customize Shado
 
 - CommandEngine.bat -> Handles modules from the modules folder
 	(Modules are what holds each command among versions and are mainly duplicates of each other)
+
+- ErrHndlr.bat -> Handles Errors relating to missing file/invalid processes
+	(This will NOT show errors relating to batch itself, Only custom made ones)
+	
+- Encdec.bat -> Handles Encrypting/Decrypting data, Used for the 0.0.3 login system
+- UacSys.bat -> Handles User Authentication (Uac = User Authentication Control)
+	(This handles data input/output to Encdec.bat and user creation, etc)
+===========================================================================================================
