@@ -207,10 +207,11 @@ Goto Entry
 :SysInfo
 Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Echo You are logged in as !User!
-Echo System: ShadowRain
-Echo Version: 0.0.3
-Echo You are currently up to date
+Echo You are currently logged in as "!User!"
+Echo Version: [ 0.0.3 ] - Release: [ Alpha ]
+Echo.
+Echo New updates here: [ https://github.com/ShadowRain-Revived/ShadowRain ] 
+Echo For information join: [ https://discord.gg/t4f3MXA ]
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
 Set Command=
