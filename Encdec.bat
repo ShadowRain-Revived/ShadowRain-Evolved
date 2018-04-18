@@ -156,7 +156,6 @@ Echo !e1!!e2!!e3!!e4!!e5!!e6!!e7!!e8!!e9!!e10!!e11!!e12!!e13!!e14!!e15!!e16!!e17
 Echo !r1!!r2!!r3!!r4!!r5!!r6!!r7!!r8!!r9!!r10!!r11!!r12!!r13!!r14!!r15!!r16!!r17!!r18!!r19!!r20!>"usr\!User!.key"
 rem ; call back to UacSys later on - ignore for now
 Echo Done, now booting startup.
-Pause>Nul
 Exit
 
 :Decrypt
@@ -327,5 +326,4 @@ If !t18!==blank Set "t18="
 If !t19!==blank Set "t19="
 If !t20!==blank Set "t20="
 Set "realPass=!t1!!t2!!t3!!t4!!t5!!t6!!t7!!t8!!t9!!t10!!t11!!t12!!t13!!t14!!t15!!t16!!t17!!t18!!t19!!t20!"
-Pause>Nul
 UacSys.bat -rp !realPass!
