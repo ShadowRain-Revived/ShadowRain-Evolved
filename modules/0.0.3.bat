@@ -211,7 +211,7 @@ Echo You are currently logged in as "!User!"
 Echo Version: [ 0.0.3 ] - Release: [ Alpha ]
 Echo.
 Echo New updates here: [ https://github.com/ShadowRain-Revived/ShadowRain ] 
-Echo For information join: [ https://discord.gg/t4f3MXA ]
+Echo For information join: [ https://discord.gg/VqjdxdE ]
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
 Set Command=
