@@ -48,7 +48,7 @@ Goto Entry
 Set currentDir=%cd%
 Cd !shadowDir!
 Echo Console Refreshed.
-modules\0.0.3.bat -z4
+modules\0.0.4.bat -z4
 Set Command=
 
 :Ls
