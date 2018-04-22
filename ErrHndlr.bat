@@ -9,6 +9,7 @@ If "%1"=="-E" If "%2"=="00_10_40" Goto NO_EXIST_ENCDEC
 If "%1"=="-E" If "%2"=="00_40_10" Goto NO_EXIST_001
 If "%1"=="-E" If "%2"=="00_40_20" Goto NO_EXIST_002
 If "%1"=="-E" If "%2"=="00_40_30" Goto NO_EXIST_003
+If "%1"=="-E" If "%2"=="00_40_40" Goto NO_EXIST_004
 If "%1"=="-E" If "%2"=="00_50_00" Goto NO_VALUE
 If "%1"=="-E" If "%2"=="00_50_10" Goto INVALID_VALUE
 If "%1"=="-E" If "%2"=="01_04_99" Goto EASTER
@@ -25,6 +26,7 @@ If "!Version!"=="" Set "Version=UNDEFINED"
 If "!Version!"=="0.0.1" cmd /k Startup.bat -s
 If "!Version!"=="0.0.2" cmd /k Startup.bat -s
 If "!Version!"=="0.0.3" cmd /k Startup.bat -s
+If "!Version!"=="0.0.4" cmd /k Startup.bat -s
 Echo "!Version!" - This is not a valid version of ShadowRain.
 Echo.
 Echo Press any key to return to the ShadowRain boot menu.
@@ -162,4 +164,15 @@ Echo :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
 Echo Press any key to terminate booting into ShadowRain
 Pause>Nul
+Exit
+
+:NO_EXIST_004
+Color 0C
+Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Echo Error : File Missing - modules\0.0.4.bat
+Echo            - Please locate the missing file and place it in this directory:
+Echo                  - %cd%\modules
+Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Echo.
+Echo Press any key to terminate booting into ShadowRain
 Exit
