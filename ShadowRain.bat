@@ -29,7 +29,8 @@ UacSys.bat -mkusr
 UacSys.bat -auth !User!
 
 :PUSHUSER
-Goto 0.0.3
+If "!Version!"=="0.0.3" Goto 0.0.3
+rem ; If "!Version!"=="0.0.4" Goto 0.0.4
 
 :0.0.1
 Title ShadowRain - System [Version : 0.0.1]
