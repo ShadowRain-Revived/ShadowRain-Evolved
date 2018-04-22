@@ -6,6 +6,7 @@ If "%1"=="-chpwd" Goto ChangePWD
 If "%1"=="-auth" If "%2"=="!User!" Goto Authenticate
 If "%1"=="-rp" If "%2"=="!realPass!" Goto CheckUser
 If "%1"=="-LGN" If "%2"=="0.0.3" Goto Login
+If "%1"=="-LGN" If "%2"=="0.0.4" Goto Login
 
 :NO_PARAM
 Color 0C
