@@ -10,6 +10,7 @@ If "%1"=="-E" If "%2"=="00_40_10" Goto NO_EXIST_001
 If "%1"=="-E" If "%2"=="00_40_20" Goto NO_EXIST_002
 If "%1"=="-E" If "%2"=="00_40_30" Goto NO_EXIST_003
 If "%1"=="-E" If "%2"=="00_40_40" Goto NO_EXIST_004
+If "%1"=="-E" If "%2"=="00_40_41" Goto NO_EXIST_NETHNDLR
 If "%1"=="-E" If "%2"=="00_50_00" Goto NO_VALUE
 If "%1"=="-E" If "%2"=="00_50_10" Goto INVALID_VALUE
 If "%1"=="-E" If "%2"=="01_04_99" Goto EASTER
@@ -175,4 +176,16 @@ Echo                  - %cd%\modules
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
 Echo Press any key to terminate booting into ShadowRain
+Exit
+
+:NO_EXIST_NETHNDLR
+Color 0C
+Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Echo Error : File Missing - NetHndlr.bat
+Echo            - Please locate the missing file and place it in this directory:
+Echo                  - %cd%\
+Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Echo.
+Echo Press any key to terminate booting into ShadowRain
+Pause>Nul
 Exit
