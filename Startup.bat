@@ -1,7 +1,7 @@
 @Echo off
 SetLocal EnableExtensions EnableDelayedExpansion
 If "%1"=="" cmd /k Startup.bat -s
-If "%1"=="-s" goto Startup
+If "%1"=="-s" goto StartupVar
 Exit
 
 :StartupVar
