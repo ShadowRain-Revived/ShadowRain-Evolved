@@ -41,6 +41,7 @@ If "!Version!"=="0.0.4" (
 	If Not Exist modules ErrHndlr.bat -E 00_10_10
 	If Not Exist CommandEngine.bat ErrHndlr.bat -E 00_10_20
 	If Not Exist modules\0.0.4.bat ErrHndlr.bat -E 00_40_40
+	If Not Exist NetHndlr.bat ErrHndlr.bat -E 00_40_41
 	If Not Exist Encdec.bat ErrHndlr.bat -E 00_10_40
 	If Not Exist UacSys.bat ErrHndlr.bat -E 00_10_30
 	If Exist ShadowRain.bat If Exist CommandEngine.bat cmd /k ShadowRain.bat -v 0.0.4
