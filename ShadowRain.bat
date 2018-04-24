@@ -4,7 +4,7 @@ If "%1"=="" Goto NO_PARAM
 If "%1"=="-v" If "%2"=="0.0.1" Goto Boot
 If "%1"=="-v" If "%2"=="0.0.2" Goto Boot
 If "%1"=="-v" If "%2"=="0.0.3" Goto Boot
-rem ; If "%1"=="-v" If "%2"=="0.0.4" Goto Boot
+If "%1"=="-v" If "%2"=="0.0.4" Goto Boot
 If "%1"=="-a" If "%2"=="OK" Goto PUSHUSER
 Exit
 
@@ -19,7 +19,7 @@ Title ShadowRain - System
 If "%2"=="0.0.1" Goto 0.0.1
 If "%2"=="0.0.2" Goto 0.0.2
 If "%2"=="0.0.3" UacSys.bat -LGN 0.0.3
-rem ; If "%2"=="0.0.4" UacSys.bat -LGN 0.0.4
+If "%2"=="0.0.4" UacSys.bat -LGN 0.0.4
 Exit
 
 :MAKE_USER
@@ -30,7 +30,7 @@ UacSys.bat -auth !User!
 
 :PUSHUSER
 If "!Version!"=="0.0.3" Goto 0.0.3
-rem ; If "!Version!"=="0.0.4" Goto 0.0.4
+If "!Version!"=="0.0.4" Goto 0.0.4
 
 :0.0.1
 Title ShadowRain - System [Version : 0.0.1]
@@ -81,5 +81,5 @@ Echo :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Pause>Nul
 Echo.
 Echo.
-rem ; CommandEngine.bat -v 0.0.4
+CommandEngine.bat -v 0.0.4
 Exit
