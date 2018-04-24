@@ -1,1 +1,0 @@
-Directory required by ShadowRain, Delete this file if working from source.
