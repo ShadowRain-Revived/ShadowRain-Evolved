@@ -117,21 +117,21 @@ Goto Entry
 
 :MkDir
 Set /P Dir="Name your desired directory: "
-Mkdir !Dir!
+Mkdir "!Dir!"
 Echo '!Dir!' has been made.
 Set Command=
 Goto Entry
 
 :RD
 Set /P REDIR="Which directory do you wish to delete?: "
-If Not Exist !reDir! (
+If Not Exist "!reDir!" (
 	Echo This directory does not exist.
 	Set Command=
 	Goto Entry
 )
 Set /P Confirm="Are you sure you want to delete '!reDir!?' (yes/no): "
 If "!Confirm!"=="yes" (
-	Rd /S /Q !reDir!
+	Rd /S /Q "!reDir!"
 	Echo '!reDir!' has been deleted.
 )
 If Not "!Confirm!"=="yes" If Not "!Confirm!"=="no" (
@@ -159,10 +159,10 @@ Goto Entry
 :MkFile
 Set /P Title="Enter a title for your file (Specify ext): "
 Set /P Text="Write your text here: "
-If Exist !Title! Echo This file already exists.
+If Exist "!Title!" Echo This file already exists.
     
-If Not Exist !Title! (
-	Echo !Text! > !Title!
+If Not Exist "!Title!" (
+	Echo "!Text!" > "!Title!"
 	Echo '!Title!' has been created.
 )
 Set Command=
@@ -170,12 +170,12 @@ Goto Entry
 
 :DelFile
 Set /P DLFile="Which file do you want to delete?: "
-If Not Exist !DLFile! (
+If Not Exist "!DLFile!" (
 	Echo '!DLFile!' does not exist.
 	Set Command=
 	Goto Entry
 )
-If Exist !DLFile!\* (
+If Exist "!DLFile!"\* (
     Echo '!DLFile!' is a directory. Use mkdir
     Set Command=
     Goto Entry
