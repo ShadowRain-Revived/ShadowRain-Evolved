@@ -41,6 +41,7 @@ If "!Command!"=="date" Goto Date
 If "!Command!"=="log" Goto Log
 If "!Command!"=="sysinfo" Goto SysInfo
 If "!Command!"=="chpwd" Goto PWDChange
+If "!Command!"=="internet" Goto NetHandler
 Set Command=
 Goto Entry
 
@@ -98,6 +99,7 @@ Echo  - date -- Displays the system date
 Echo  - log -- Displays the system time and date
 Echo  - sysinfo -- Displays the system information
 Echo  - chpwd -- Allows you to change your password
+Echo  - internet -- Allows you to access the internet
 Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
@@ -219,5 +221,23 @@ Goto Entry
 
 :PWDChange
 UacSys.bat -chpwd
+Set Command=
+Goto Entry
+
+:NetHandler
+:: Ignore this function, It is for testing only
+Set /P NetSrc="URL?: "
+Set OriginString=!NetSrc!
+If Not "N!NetSrc:http://=!"=="N!NetSrc!" (
+	Echo String Contains http://
+	Set Command=
+	Goto Entry
+)
+If Not "N!NetSrc:https://=!"=="N!NetSrc!" (
+	Echo String Contains https://
+	Set Command=
+	Goto Entry
+)
+Echo String neither contains http:// or https:// (Would be invalid)
 Set Command=
 Goto Entry
