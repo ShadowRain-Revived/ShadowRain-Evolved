@@ -15,7 +15,8 @@ If "%1"=="-E" If "%2"=="00_50_00" Goto NO_VALUE
 If "%1"=="-E" If "%2"=="00_50_10" Goto INVALID_VALUE
 If "%1"=="-E" If "%2"=="01_04_99" Goto EASTER
 If "%1"=="-E" If "%2"=="02_01_00" Goto NO_USER
-If "%1"=="-E" If "%2"=="E0_04_01" Goto USER_IS_NULL
+If "%1"=="-E" If "%2"=="E0_03_01" Goto USER_IS_NULL_03
+If "%1"=="-E" If "%2"=="E0_04_01" Goto USER_IS_NULL_04
 Exit
 
 :NO_PARAM
@@ -132,11 +133,20 @@ Echo.
 Pause>Nul
 Exit
 
-:USER_IS_NULL
+:USER_IS_NULL_03
 Cls
 Color 0C
 Echo.
-Echo -- Unable to boot, User is a null value. --
+Echo -- Unable to boot into 0.0.3, User is a null value. --
+Echo.
+Pause>Nul
+Exit
+
+:USER_IS_NULL_04
+Cls
+Color 0C
+Echo.
+Echo -- Unable to boot into 0.0.4, User is a null value. --
 Echo.
 Pause>Nul
 Exit
