@@ -229,12 +229,14 @@ Goto Entry
 Set /P NetSrc="URL?: "
 Set OriginString=!NetSrc!
 If Not "N!NetSrc:http://=!"=="N!NetSrc!" (
-	Echo String Contains http://
+	:: Echo String Contains http://
+	NetHndlr.bat -http -check
 	Set Command=
 	Goto Entry
 )
 If Not "N!NetSrc:https://=!"=="N!NetSrc!" (
-	Echo String Contains https://
+	:: Echo String Contains https://
+	NetHndlr.bat -https -check
 	Set Command=
 	Goto Entry
 )
