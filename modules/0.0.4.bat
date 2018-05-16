@@ -12,6 +12,10 @@ Exit
 :Exec
 Set shadowDir=%cd%
 Cd !currentDir!>Nul
+If "!User!"=="" (
+	ErrHndlr.bat -E E_04_01
+	Exit
+)
 Set Command=
 Goto Entry
 Exit
