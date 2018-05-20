@@ -45,7 +45,31 @@ Exit
 :: GOV domains should always be Https
 If Not "N!OriginString:.gov=!"=="N!OriginString!" (
 	:: URL contains .gov
-	Echo URL contains .gov
+	Echo URL contains .gov [Https]
+	Pause>Nul
+	Exit
+)
+If Not "N!OriginString:.net=!"=="N!OriginString!" (
+	:: URL contains .net
+	Echo URL contains .net [Https]
+	Pause>Nul
+	Exit
+)
+If Not "N!OriginString:.com=!"=="N!OriginString!" (
+	:: URL contains .com
+	Echo URL contains .com [Https]
+	Pause>Nul
+	Exit
+)
+If Not "N!OriginString:.co.uk=!"=="N!OriginString!" (
+	:: URL contains .co.uk
+	Echo URL contains .co.uk [Https]
+	Pause>Nul
+	Exit
+)
+If Not "N!OriginString:.co=!"=="N!OriginString!" (
+	:: URL contains .co
+	Echo URL contains .co [Https]
 	Pause>Nul
 	Exit
 )
