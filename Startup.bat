@@ -4,6 +4,7 @@ If "%1"=="" cmd /k Startup.bat -s
 If "%1"=="-s" Goto StartupVar
 Exit
 
+:: test
 :StartupVar
 Cls
 Title ShadowRain - Boot Menu
