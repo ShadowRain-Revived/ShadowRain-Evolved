@@ -1,6 +1,6 @@
 @Echo off
 SetLocal EnableExtensions EnableDelayedExpansion
-If "%1"=="" cmd /k Startup.bat -s
+If "%1"=="" cmd /k %0 -s
 If "%1"=="-s" Goto StartupVar
 Exit
 
