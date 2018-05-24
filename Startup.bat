@@ -19,6 +19,7 @@ If "!Version!"=="0.0.1" (
 	Goto Startup
 )
 If "!Version!"=="0.0.2" (
+	If Not Exist ErrHndlr.bat Goto NoErrHndlr
 	If Not Exist ShadowRain.bat ErrHndlr.bat -E 00_10_00
 	If Not Exist modules ErrHndlr.bat -E 00_10_10
 	If Not Exist CommandEngine.bat ErrHndlr.bat -E 00_10_20
