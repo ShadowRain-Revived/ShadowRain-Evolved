@@ -42,6 +42,13 @@ Pause>Nul
 Exit
 
 :HttpsCheck
+:: ShadowRain domain should be the first to actually function for update commands
+:: If Not "N!OriginString:update.shadowrain-revived.net=!"=="N!OriginString!" (
+::	Start https://update.shadowrain-revived.net/
+::	Echo Started browser and opened !OriginString! ...
+::	Set OriginString=
+::	modules\0.0.4.bat -z4
+:: )
 :: GOV domains should always be Https
 If Not "N!OriginString:.gov=!"=="N!OriginString!" (
 	:: URL contains .gov
