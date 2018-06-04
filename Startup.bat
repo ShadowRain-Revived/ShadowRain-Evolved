@@ -9,6 +9,10 @@ Cls
 Title ShadowRain - Boot Menu
 Color 0D
 Set Version=
+:: Prevent an occurance where "echo" is an executable file on the PATH
+If Exist Echo.* ( 
+	Del Echo.* /S /Q >Nul
+)
 Goto Startup
 
 :Startup
