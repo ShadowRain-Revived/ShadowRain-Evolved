@@ -42,32 +42,33 @@ If Not Exist usr\!User!.usr ErrHndlr.bat -E 02_01_00
 :MKUSR
 Cls
 Set /P "User=Select a username: "
+Set UserString=!User!
 If Exist usr\!User!.usr Goto NAME_IN_USE
 If "!User!"==" "!User! If "!User!"==!User!" " (
-	Echo Error, remove the space before continuing.
-	Pause>Nul
-	Goto MKUSR
+	ErrHndlr.bat -E E0_10_30
 )
 If "!User!"==" " (
-	Echo Error, you must enter a username.
-	Pause>Nul
-	Goto MKUSR
+	ErrHndlr.bat -E E0_10_31
 )
 If "!User!"=="" (
-	Echo Error, you must enter a username.
-	Pause>Nul
-	Goto MKUSR
+	ErrHndlr.bat -E E0_10_31
 )
+If Not "U!UserString:cock=!"=="U!UserString!" ErrHndlr.bat -E E0_33_01
+If Not "U!UserString:porn=!"=="U!UserString!" ErrHndlr.bat -E E0_33_01
+If Not "U!UserString:sex=!"=="U!UserString!" ErrHndlr.bat -E E0_33_01
+If Not "U!UserString:vagina=!"=="U!UserString!" ErrHndlr.bat -E E0_33_01
 If Not Exist usr\!User!.usr Goto MKPWD
 
 :MKPWD
 Set /P "Password=Password? (a-z, A-Z, 0-9): "
 If "!Password!"==" "!Password! If "!Password!"==!Password!" " (
+	:: ErrHndlr.bat -E E0_25_00
 	Echo Error, remove the space before continuing.
 	Pause>Nul
 	Goto MKPWD
 )
 If "!Password!"=="" (
+	:: ErrHndlr.bat -E E0_25_01
 	Echo You must enter a password before continuing!
 	Pause>Nul
 	Goto MKPWD
