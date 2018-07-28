@@ -31,6 +31,8 @@ If "%1"=="-Warn" If "%2"=="USER_PW00_NL00" Goto UserSystem_Pass_Contains_Null
 If "%1"=="-Warn" If "%2"=="USER_NX00_0000" Goto UserSystem_User_Missing_File
 If "%1"=="-Warn" If "%2"=="USER_CT00_1800" Goto UserSystem_User_Contains_BadContent
 If "%1"=="-Warn" If "%2"=="USER_PW00_NM00" Goto UserSystem_Pass_NoMatch
+:: System Related Errors
+If "%1"=="-Error" If "%2"=="SRST_0000_0000" Goto System_Version_IsNull
 :: Unknown Errors
 If "%1"=="-Error" If "%2"=="UKWN_9999_0000" Goto System_Unknown_Error
 Exit

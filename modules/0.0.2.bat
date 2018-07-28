@@ -13,7 +13,7 @@ Exit
 Set shadowDir=%cd%
 Cd !currentDir!>Nul
 If "!Version!"=="" (
-	..\ErrHndlr.bat -E E0_03_01
+	..\ErrHndlr.bat -Error SRST_0000_0000
 	Exit
 )
 Set Command=

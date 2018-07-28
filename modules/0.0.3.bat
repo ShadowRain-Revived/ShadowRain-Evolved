@@ -13,7 +13,7 @@ Exit
 Set shadowDir=%cd%
 Cd !currentDir!>Nul
 If "!User!"=="" (
-	..\ErrHndlr.bat -E E0_03_01
+	..\ErrHndlr.bat -Error USER_NL00_0000
 	Exit
 )
 Set Command=
