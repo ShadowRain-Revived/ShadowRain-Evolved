@@ -1,11 +1,12 @@
 @Echo off
 SetLocal EnableExtensions EnableDelayedExpansion
 If "%1"=="" Goto NO_PARAM
-If "%1"=="-v" If "%2"=="0.0.1" Goto Boot
-If "%1"=="-v" If "%2"=="0.0.2" Goto Boot
-If "%1"=="-v" If "%2"=="0.0.3" Goto Boot
-If "%1"=="-v" If "%2"=="0.0.4" Goto Boot
-If "%1"=="-a" If "%2"=="OK" Goto PUSHUSER
+If "%1"=="-Version" If "%2"=="0.0.1" Goto System_Boot
+If "%1"=="-Version" If "%2"=="0.0.2" Goto System_Boot
+If "%1"=="-Version" If "%2"=="0.0.3" Goto System_Boot
+If "%1"=="-Version" If "%2"=="0.0.4" Goto System_Boot
+If "%1"=="-Authenticate" If "%2"=="0.0.3" Goto 0.0.3
+If "%1"=="-Authenticate" If "%2"=="0.0.4" Goto 0.0.4
 Exit
 
 :NO_PARAM
@@ -13,24 +14,14 @@ Color 0C
 Echo -- Unable to run file - No parameter is defined, Returning to boot menu.
 Exit
 
-:Boot
+:System_Boot
 Cls
 Title ShadowRain - System
 If "%2"=="0.0.1" Goto 0.0.1
 If "%2"=="0.0.2" Goto 0.0.2
-If "%2"=="0.0.3" UacSys.bat -LGN 0.0.3
-If "%2"=="0.0.4" UacSys.bat -LGN 0.0.4
+If "%2"=="0.0.3" UacSys.bat -LoginVersion 0.0.3
+If "%2"=="0.0.4" UacSys.bat -LoginVersion 0.0.4
 Exit
-
-:MAKE_USER
-UacSys.bat -mkusr
-
-:AUTHENTICATE
-UacSys.bat -auth !User!
-
-:PUSHUSER
-If "!Version!"=="0.0.3" Goto 0.0.3
-If "!Version!"=="0.0.4" Goto 0.0.4
 
 :0.0.1
 Title ShadowRain - System [Version : 0.0.1]

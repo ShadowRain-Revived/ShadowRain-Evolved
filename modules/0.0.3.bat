@@ -180,7 +180,7 @@ If Exist "!DLFile!"\* (
 )
 Set /P Response="Do you really want to delete '!DLFile!'? (yes/no): "
 If "!Response!"=="yes" (
-	Del /Q !DLFile!
+	Del /Q "!DLFile!"
 	Set Command=
 	Goto Entry
 )  

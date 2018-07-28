@@ -12,6 +12,10 @@ Exit
 :Exec
 Set shadowDir=%cd%
 Cd !currentDir!>Nul
+If "!Version!"=="" (
+	..\ErrHndlr.bat -E E0_03_01
+	Exit
+)
 Set Command=
 Goto Entry
 Exit
@@ -39,6 +43,7 @@ If "!Command!"=="mkfile" Goto MkFile
 If "!Command!"=="delfile" Goto DelFile
 If "!Command!"=="date" Goto Date
 If "!Command!"=="log" Goto Log
+If "!Command!"=="update" Goto Update
 Set Command=
 Goto Entry
 
@@ -94,6 +99,7 @@ Echo  - mkfile -- Allows you to make a file inside a directory (must specify ext
 Echo  - delfile -- Allows you to delete a file (must specify ext)
 Echo  - date -- Displays the system date
 Echo  - log -- Displays the system time and date
+Echo  - update -- Checks for updates to ShadowRain
 Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
@@ -198,5 +204,10 @@ Goto Entry
 Echo.
 Echo %date% %time%
 Echo.
+Set Command=
+Goto Entry
+
+:Update
+Start https://update.shadowrain-revived.net/?update=0.0.2
 Set Command=
 Goto Entry

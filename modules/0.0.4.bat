@@ -215,6 +215,7 @@ Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo You are currently logged in as "!User!"
 Echo Version: [ 0.0.4 ] - Release: [ Alpha ]
+Echo System Process ID: !SystemProcessID!
 Echo.
 Echo Check for new updates here: [ https://github.com/ShadowRain-Revived/ShadowRain ] 
 Echo For information join: [ https://discord.gg/VqjdxdE ]
