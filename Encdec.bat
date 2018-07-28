@@ -11,10 +11,12 @@ Echo -- Unable to run file - No parameter is defined.
 Exit
 
 :Encrypt
+If "!User!"=="" ErrHndlr.bat -E U3_ED_01
 Set "Format=usr\!User!" 
 Goto EncryptPwd 
 
 :EncryptPwd
+If "!confPass!"=="" ErrHndlr.bat -E U3_ED_02
 Set "Password=!confPass!" 
 Goto EncryptStg2
 
@@ -159,6 +161,7 @@ Echo Done, now booting startup.
 Exit
 
 :Decrypt
+If "!User!"=="" ErrHndlr.bat -E U3_ED_01
 Set "UserFile=usr\!User!"
 If Not Exist "!UserFile!.pwd" Goto ERRpwd
 If Not Exist "!UserFile!.key" Goto ERRkey
