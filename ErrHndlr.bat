@@ -17,6 +17,8 @@ If "%1"=="-E" If "%2"=="01_04_99" Goto EASTER
 If "%1"=="-E" If "%2"=="02_01_00" Goto NO_USER
 If "%1"=="-E" If "%2"=="E0_03_01" Goto USER_IS_NULL_03
 If "%1"=="-E" If "%2"=="E0_04_01" Goto USER_IS_NULL_04
+If "%1"=="-E" If "%2"=="U3_ED_01" Goto NO_DIRECT_EXEC
+If "%1"=="-E" If "%2"=="U3_ED_02" Goto NO_DIRECT_EXEC
 Exit
 
 :NO_PARAM
@@ -147,6 +149,16 @@ Cls
 Color 0C
 Echo.
 Echo -- Unable to boot into 0.0.4, User is a null value. --
+Echo.
+Pause>Nul
+Exit
+
+:NO_DIRECT_EXEC
+Cls
+Color 0C
+Echo.
+Echo -- Unable to run ShadowRain, Direct execution of files is disallowed
+Echo -- Run Startup.bat instead
 Echo.
 Pause>Nul
 Exit
