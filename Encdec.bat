@@ -325,5 +325,4 @@ If !t18!==blank Set "t18="
 If !t19!==blank Set "t19="
 If !t20!==blank Set "t20="
 Set "CheckedPass=!t1!!t2!!t3!!t4!!t5!!t6!!t7!!t8!!t9!!t10!!t11!!t12!!t13!!t14!!t15!!t16!!t17!!t18!!t19!!t20!"
-Pause>Nul
 UacSys.bat -Authenticate !CheckedPass!
