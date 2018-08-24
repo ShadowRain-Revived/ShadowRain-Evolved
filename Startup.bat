@@ -5,6 +5,7 @@ If "%1"=="-s" goto Startup
 Exit
 
 :Startup
+mode con: cols=120 lines=25
 Cls
 Title ShadowRain - Boot Menu
 Color 0D
