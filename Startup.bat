@@ -4,6 +4,8 @@ If "%1"=="" cmd /k %0 -Start
 If "%1"=="-Start" Goto System_Startup
 Exit
 
+:Startup
+mode con: cols=120 lines=25
 :System_Startup
 Cls
 Title ShadowRain - Boot Menu
