@@ -1,11 +1,15 @@
 @Echo off
 SetLocal EnableExtensions EnableDelayedExpansion
 If "%1"=="" Goto NO_PARAM
-If "%1"=="-mkusr" Goto MKUSR
-If "%1"=="-chpwd" Goto ChangePWD
-If "%1"=="-auth" If "%2"=="!User!" Goto Authenticate
-If "%1"=="-rp" If "%2"=="!realPass!" Goto CheckUser
-If "%1"=="-LGN" If "%2"=="0.0.3" Goto Login
+:: Login Things
+If "%1"=="-LoginVersion" If "%2"=="0.0.3" Goto Login
+If "%1"=="-LoginVersion" If "%2"=="0.0.4" Goto Login
+:: User Things (Make_User : Line 38) 
+If "%1"=="-MakeUser" Goto Make_User
+If "%1"=="-ChangePassword" Goto Change_Password
+:: Authentication Things
+If "%1"=="-Authenticate" If "%2"=="!CheckedPass!" Goto Authenticated_User
+ErrHndlr.bat -Error UKWN_9999_0000
 
 :NO_PARAM
 Color 0C
@@ -16,155 +20,99 @@ Exit
 Cls
 Color 0D
 If Not Exist usr Mkdir usr
-If Not Exist usr\*.usr Goto MKUSR
-If Exist usr\*.usr Set /P Choice="[1] Login [2] New Account: "
-If "!Choice!"=="1" Goto Sign_In
-If "!Choice!"=="2" Goto MKUSR
-If Not "!Choice!"=="1" If Not "!Choice!"=="2" (
-	Echo Please choose one of the options above.
-	Pause>Nul
-	Goto Login
-)
-
-:Sign_In
-Cls
-Set /P User="Username?: "
-If "!User!"==" "!User! If "!User!"==!User!" " (
-	Echo That username is invalid. Remove the space.
-	Pause>Nul
-	Goto Login
-)
-If "!User!"=="" Goto Sign_In
-If Exist usr\*!User!.usr Goto AUTHENTICATE
-If Not Exist usr\!User!.usr ErrHndlr.bat -E 02_01_00
-
-:MKUSR
-Cls
-Set /P "User=Select a username: "
-If Exist usr\!User!.usr Goto NAME_IN_USE
-If "!User!"==" "!User! If "!User!"==!User!" " (
-	Echo Error, remove the space before continuing.
-	Pause>Nul
-	Goto MKUSR
-)
-If "!User!"==" " (
-	Echo Error, you must enter a username.
-	Pause>Nul
-	Goto MKUSR
-)
-If "!User!"=="" (
-	Echo Error, you must enter a username.
-	Pause>Nul
-	Goto MKUSR
-)
-If Not Exist usr\!User!.usr Goto MKPWD
-
-:MKPWD
-Set /P "Password=Password? (a-z, A-Z, 0-9): "
-If "!Password!"==" "!Password! If "!Password!"==!Password!" " (
-	Echo Error, remove the space before continuing.
-	Pause>Nul
-	Goto MKPWD
-)
-If "!Password!"=="" (
-	Echo You must enter a password before continuing!
-	Pause>Nul
-	Goto MKPWD
-)
-Set /P "confPass=Confirm Password?: "
-If "!confPass!"==" "!confPass! If "!confPass!"==!confPass!" " (
-	Echo Error, remove the space before continuing.
-	Pause>Nul
-	Goto MKPWD
-)
-If "!confPass!"=="" (
-	Echo You must enter a password before continuing!
-	Pause>Nul
-	Goto MKPWD
-)
-If "!Password!"=="!confPass!" Goto USR_Create
-Goto Incorrect_Pass
-
-:USR_CREATE
-If Exist usr\!User!.usr Goto EncryptStg1
-If Not Exist usr\!User!.usr (
-	Echo !User! > usr\!User!.usr
-	Echo '!User!' was created on the system.
-	Goto EncryptStg1
-) Else (
-	Color 0C
-	Echo An error occured.
-	Goto EXT
-)
-
-:NAME_IN_USE
+If Not Exist usr\*.usr Goto Make_User
+Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
-Echo This name already exists on the system.
+Echo Type "login" to login to ShadowRain
+Echo Type "newuser" to make a new user account
 Echo.
-Pause>Nul
-Goto MKUSR
-
-:Authenticate
-Set /P Password="Password?: "
-If "!Password!"==" "!Password! If "!Password!"==!Password!" " (
-	Echo Error, you must remove all spaces in the password.
-	Pause>Nul
-	Goto Authenticate
-)
-If "!Password!"=="" (
-	Echo You must enter a password before continuing!
-	Pause>Nul
-	Goto Authenticate
-)
-Set /P "confPass=Confirm Password?: "
-If "!confPass!"==" "!confPass! If "!confPass!"==!confPass!" " (
-	Echo That password is invalid, please remove the space.
-	Pause>Nul
-	Goto Authenticate
-)
-If "!confPass!"=="" (
-	Echo Error, you must remove all spaces in the password.
-	Pause>Nul
-	Goto Authenticate
-)
-If Exist usr\!User!.usr Goto AuthStg2
-
-:AuthStg2
-If "!Password!"=="!confPass!" Goto AuthStg3
-Goto Incorrect_Pass
-
-:AuthStg3
-Encdec.bat -u !User! -p !confPass!
-Exit
-
-:EncryptStg1
-Set "User=!User!"
-Set "Password=!confPass!"
-If Exist usr\!User!.usr Goto EncryptStg2
-Goto MKUSR
-
-:EncryptStg2
-If "!Password!"=="!confPass!" Goto EncryptStg3
-Goto Incorrect_Pass
-
-:EncryptStg3
-Encdec.bat -a !User! -p !confPass!
-
-:CheckUser
-If "!confPass!"=="!realPass!" Goto UserOk
-Goto Incorrect_Pass
-
-:UserOk
-Cls
-ShadowRain.bat -a OK
-
-:ChangePWD
-Goto MKPWD
-
-:EXT
-Exit
-
-:Incorrect_Pass
-Echo Passwords do not match.
+Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+If Exist usr\*.usr Set /P Login_Option="Option?: "
+:: Skip to Line 95 to edit User_Login
+If "!Login_Option!"=="login" Goto User_Login
+If "!Login_Option!"=="newuser" UacSys.bat -MakeUser
+Echo Please choose from the options above.
 Pause>Nul
 Goto Login
+
+:Make_User
+Cls
+Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Echo.
+Echo Welcome to the ShadowRain User Account Creation Area
+Echo.
+Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+Set /P "User=What username would you like?: "
+If Exist usr\!User!.usr (
+	Echo Sorry! That name already exists.
+	Goto Make_User
+)
+If "!User!"==" "!User! If "!User!"==!User!" " (
+	ErrHndlr.bat -Warn USER_SP00_0000
+)
+If "!User!"==" " (
+	ErrHndlr.bat -Warn USER_SP00_0000
+)
+If "!User!"=="" (
+	ErrHndlr.bat -Warn USER_NL00_0000
+)
+If Not "U!User:cock=!"=="U!User!" ErrHndlr.bat -Warn USER_CT00_1800
+If Not "U!User:porn=!"=="U!User!" ErrHndlr.bat -Warn USER_CT00_1800
+If Not "U!User:sex=!"=="U!User!" ErrHndlr.bat -Warn USER_CT00_1800
+If Not "U!User:vagina=!"=="U!User!" ErrHndlr.bat -Warn USER_CT00_1800
+Goto Make_Password
+
+:Make_Password
+Set /P "Password=Password to login with? (a-z, A-Z, 0-9): "
+If "!Password!"==" "!Password! If "!Password!"==!Password!" " (
+	ErrHndlr.bat -Warn USER_PW00_0000
+)
+If "!Password!"=="" (
+	ErrHndlr.bat -Warn USER_PW00_NL00
+)
+Set /P "Confirm_Password=Confirm Password?: "
+If "!Confirm_Password!"==" "!Confirm_Password! If "!Confirm_Password!"==!Confirm_Password!" " (
+	ErrHndlr.bat -Warn USER_PW00_0000
+)
+If "!Confirm_Password!"=="" (
+	ErrHndlr.bat -Warn USER_PW00_NL00
+)
+If "!Password!"=="!Confirm_Password!" (
+	If Not Exist usr\!User!.usr (
+		Echo !User! > usr\!User!.usr
+		Echo "!User!" was created on the system.
+		Goto Encryption_Tree
+	) Else (
+		Goto Encryption_Tree
+	)
+) Else (
+	ErrHndlr.bat -Warn USER_PW00_NM00
+)
+
+:Encryption_Tree
+Encdec.bat -AddUser !User! -Password !Password!
+
+:User_Login
+Set /P "User=Username?: "
+If Not Exist usr\!User!.usr (
+	ErrHndlr.bat -Warn USER_NX00_0000
+)
+Set /P "Password=Password?: "
+If "!Password!"==" "!Password! If "!Password!"==!Password!" " (
+	ErrHndlr.bat -Warn USER_PW00_0000
+)
+If "!Password!"=="" (
+	ErrHndlr.bat -Warn USER_PW00_NL00
+)
+Encdec.bat -CheckUser !User! -Password !Password!
+
+:Authenticated_User
+If "!Password!"=="!CheckedPass!" (
+	If "!Version!"=="0.0.3" (
+		ShadowRain.bat -Authenticate 0.0.3
+	)
+	If "!Version!"=="0.0.4" (
+		ShadowRain.bat -Authenticate 0.0.4
+	)
+)
+ErrHndlr.bat -Warn USER_PW00_NM00

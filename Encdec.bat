@@ -1,8 +1,8 @@
 @Echo off
 SetLocal EnableExtensions EnableDelayedExpansion
 If "%1"=="" Goto NO_PARAM
-If "%1"=="-a" If "%2"=="!User!" If "%3"=="-p" If "%4"=="!confPass!" Goto Encrypt
-If "%1"=="-u" If "%2"=="!User!" If "%3"=="-p" If "%4"=="!confPass!" Goto Decrypt
+If "%1"=="-AddUser" If "%2"=="!User!" If "%3"=="-Password" If "%4"=="!Password!" Goto Encrypt
+If "%1"=="-CheckUser" If "%2"=="!User!" If "%3"=="-Password" If "%4"=="!Password!" Goto Decrypt
 Exit
 
 :NO_PARAM
@@ -15,7 +15,6 @@ Set "Format=usr\!User!"
 Goto EncryptPwd 
 
 :EncryptPwd
-Set "Password=!confPass!" 
 Goto EncryptStg2
 
 :EncryptStg2
@@ -325,5 +324,5 @@ If !t17!==blank Set "t17="
 If !t18!==blank Set "t18="
 If !t19!==blank Set "t19="
 If !t20!==blank Set "t20="
-Set "realPass=!t1!!t2!!t3!!t4!!t5!!t6!!t7!!t8!!t9!!t10!!t11!!t12!!t13!!t14!!t15!!t16!!t17!!t18!!t19!!t20!"
-UacSys.bat -rp !realPass!
+Set "CheckedPass=!t1!!t2!!t3!!t4!!t5!!t6!!t7!!t8!!t9!!t10!!t11!!t12!!t13!!t14!!t15!!t16!!t17!!t18!!t19!!t20!"
+UacSys.bat -Authenticate !CheckedPass!

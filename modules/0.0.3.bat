@@ -12,6 +12,10 @@ Exit
 :Exec
 Set shadowDir=%cd%
 Cd !currentDir!>Nul
+If "!User!"=="" (
+	..\ErrHndlr.bat -Error USER_NL00_0000
+	Exit
+)
 Set Command=
 Goto Entry
 Exit
@@ -118,7 +122,7 @@ Goto Entry
 
 :RD
 Set /P REDIR="Which directory do you wish to delete?: "
-If Not Exist !reDir! (
+If Not Exist "!reDir!" (
 	Echo This directory does not exist.
 	Set Command=
 	Goto Entry
@@ -153,10 +157,10 @@ Goto Entry
 :MkFile
 Set /P Title="Enter a title for your file (Specify ext): "
 Set /P Text="Write your text here: "
-If Exist !Title! Echo This file already exists.
+If Exist "!Title!" Echo This file already exists.
     
-If Not Exist !Title! (
-	Echo !Text! > !Title!
+If Not Exist "!Title!" (
+	Echo "!Text!" > "!Title!"
 	Echo '!Title!' has been created.
 )
 Set Command=
@@ -164,19 +168,19 @@ Goto Entry
 
 :DelFile
 Set /P DLFile="Which file do you want to delete?: "
-If Not Exist !DLFile! (
+If Not Exist "!DLFile!" (
 	Echo '!DLFile!' does not exist.
 	Set Command=
 	Goto Entry
 )
-If Exist !DLFile!\* (
-    Echo '!DLFile!' is a directory. Use mkdir
+If Exist "!DLFile!"\* (
+    Echo '!DLFile!' is a directory. Use rmdir
     Set Command=
     Goto Entry
 )
 Set /P Response="Do you really want to delete '!DLFile!'? (yes/no): "
 If "!Response!"=="yes" (
-	Del /Q !DLFile!
+	Del /Q "!DLFile!"
 	Set Command=
 	Goto Entry
 )  
