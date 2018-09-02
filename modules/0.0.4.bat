@@ -33,6 +33,7 @@ If "!Command!"=="commands" Goto Help
 If "!Command!"=="date" Goto Date
 If "!Command!"=="delfile" Goto DelFile
 If "!Command!"=="dir" Goto Ls
+If "!Command!"=="directexec" Goto DirectExec
 If "!Command!"=="help" Goto Help
 If "!Command!"=="internet" Goto NetHandler
 If "!Command!"=="log" Goto Log
@@ -263,3 +264,7 @@ If Not "N!NetSrc:https://=!"=="N!NetSrc!" (
 Echo "!NetSrc!" is not a valid website, Run the command and try again.
 Set Command=
 Goto Entry
+
+:DirectExec
+Set /P DirectCommand="Command?: "
+!DirectCommand! && modules\0.0.4.bat -LoadModule
