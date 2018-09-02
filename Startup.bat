@@ -14,7 +14,7 @@ Set Version=
 If Exist Echo.* ( 
 	Del Echo.* /S /Q >Nul
 )
-:: Say "Please Wait..." due to :SetupContainer taking more than 3 seconds.
+:: Say "Please Wait..." due to :System_GetProcessID taking more than 3 seconds.
 Echo Please Wait...
 Goto System_GetProcessID
 

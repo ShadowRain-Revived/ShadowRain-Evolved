@@ -22,4 +22,4 @@ modules\0.0.2.bat -z2
 modules\0.0.3.bat -z3
 
 :0.0.4
-modules\0.0.4.bat -z4
+modules\0.0.4.bat -LoadModule

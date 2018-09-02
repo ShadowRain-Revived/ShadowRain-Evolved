@@ -1,8 +1,8 @@
 @Echo Off
 SetLocal EnableExtensions EnableDelayedExpansion
 If "%1"=="" Goto NO_PARAM
-If "%1"=="-http" If "%2"=="-check" Goto HttpCheck
-If "%1"=="-https" If "%2"=="-check" Goto HttpsCheck
+If "%1"=="-Http" If "%2"=="-CheckString" Goto HttpCheck
+If "%1"=="-Https" If "%2"=="-CheckString" Goto HttpsCheck
 Exit
 
 :NO_PARAM
@@ -15,118 +15,249 @@ Exit
 If Not "N!OriginString:.net=!"=="N!OriginString!" (
     :: URL contains .net
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
-        ErrHndlr.bat -E SOME_ERROR
+        ErrHndlr.bat -Warn NW00_BD00_0001
     )
     If Not "N!OriginString:download=!"=="N!OriginString!" (
-        ErrHndlr.bat -E SOME_ERROR
+		ErrHndlr.bat -Warn NW00_BD00_0002
     )
     If Not "N!OriginString:sex=!"=="N!OriginString!" (
-        ErrHndlr.bat -E SOME_ERROR
+		ErrHndlr.bat -Warn NW00_BD00_0003
     )
-    Pause>Nul
-    Exit
+    If Not "N!OriginString:xxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:redtube=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:xnxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xhamster=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+	Start !OriginString!
+	modules\0.0.4.bat -LoadModule
 )
 If Not "N!OriginString:.com=!"=="N!OriginString!" (
     :: URL contains .com
-    Echo URL contains .com
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
-        ErrHndlr.bat -E SOME_ERROR
+        ErrHndlr.bat -Warn NW00_BD00_0001
     )
-    If Not "N!OriginString:download=!"=="N!OriginString" (
-        ErrHndlr.bat -E SOME_ERROR
+    If Not "N!OriginString:download=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0002
     )
-    If Not "N!OriginString:sex=!"=="N!OriginString" (
-        ErrHndlr.bat -E SOME_ERROR
+    If Not "N!OriginString:sex=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
     )
-    If Not "N!OriginString:xxx=!"=="N!OriginString" (
-        ErrHndlr.bat -E SOME_ERROR
+    If Not "N!OriginString:xxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
     )
-    If Not "N!OriginString:redtube=!"=="N!OriginString" (
-        ErrHndlr.bat -E SOME_ERROR
+    If Not "N!OriginString:redtube=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0001
     )
-    If Not "N!OriginString:xnxx=!"=="N!OriginString" (
-        ErrHndlr.bat -E SOME_ERROR
+    If Not "N!OriginString:xnxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
     )
-    If Not "N!OriginString:xhamster=!"=="N!OriginString" (
-        ErrHndlr.bat -E SOME_ERROR
+    If Not "N!OriginString:xhamster=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
     )
-    Pause>Nul
-    Exit
+	Start !OriginString!
+	modules\0.0.4.bat -LoadModule
 )
 If Not "N!OriginString:.co.uk=!"=="N!OriginString!" (
     :: URL contains .co.uk
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
-        ErrHndlr.bat -E SOME_ERROR
+        ErrHndlr.bat -Warn NW00_BD00_0001
     )
     If Not "N!OriginString:download=!"=="N!OriginString!" (
-        ErrHndlr.bat -E SOME_ERROR
+		ErrHndlr.bat -Warn NW00_BD00_0002
     )
     If Not "N!OriginString:sex=!"=="N!OriginString!" (
-        ErrHndlr.bat -E SOME_ERROR
+		ErrHndlr.bat -Warn NW00_BD00_0003
     )
-    Pause>Nul
-    Exit
+    If Not "N!OriginString:xxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:redtube=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:xnxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xhamster=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    Start !OriginString!
+	modules\0.0.4.bat -LoadModule
 )
 If Not "N!OriginString:.co=!"=="N!OriginString!" (
     :: URL contains .co
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
-        ErrHndlr.bat -E SOME_ERROR
+        ErrHndlr.bat -Warn NW00_BD00_0001
     )
     If Not "N!OriginString:download=!"=="N!OriginString!" (
-        ErrHndlr.bat -E SOME_ERROR
+		ErrHndlr.bat -Warn NW00_BD00_0002
     )
     If Not "N!OriginString:sex=!"=="N!OriginString!" (
-        ErrHndlr.bat -E SOME_ERROR
+		ErrHndlr.bat -Warn NW00_BD00_0003
     )
-    Pause>Nul
-    Exit
+    If Not "N!OriginString:xxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:redtube=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:xnxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xhamster=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    Start !OriginString!
+	modules\0.0.4.bat -LoadModule
 )
 :: URL is not known by the HttpCheck
-Echo URL is unknown by HttpCheck
-Pause>Nul
-Exit
+ErrHndlr.bat -Warn NW00_UKN0_0010
 
 :HttpsCheck
-:: ShadowRain domain should be the first to actually function for update commands
-If Not "N!OriginString:update.shadowrain-revived.net=!"=="N!OriginString!" (
-    Start https://update.shadowrain-revived.net/
+:: ShadowRain domain should be the first to actually function for update commands (Website down)
+:: If Not "N!OriginString:update.shadowrain-revived.net=!"=="N!OriginString!" (
+    :: Start https://update.shadowrain-revived.net/
     :: This is debugging
-    Echo Started browser and opened !OriginString! ...
-    Set OriginString=
-    modules\0.0.4.bat -z4
-)
+    :: Echo Started browser and opened !OriginString! ...
+    :: Set OriginString=
+    :: modules\0.0.4.bat -LoadModule
+:: )
 :: GOV domains should always be Https
 If Not "N!OriginString:.gov=!"=="N!OriginString!" (
     :: URL contains .gov
-    Echo URL contains .gov [Https]
-    Pause>Nul
-    Exit
+    If Not "N!OriginString:porn=!"=="N!OriginString!" (
+        ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:download=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0002
+    )
+    If Not "N!OriginString:sex=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:redtube=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:xnxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xhamster=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+	Start !OriginString!
+	modules\0.0.4.bat -LoadModule
 )
 If Not "N!OriginString:.net=!"=="N!OriginString!" (
     :: URL contains .net
-    Echo URL contains .net [Https]
-    Pause>Nul
-    Exit
+    If Not "N!OriginString:porn=!"=="N!OriginString!" (
+        ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:download=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0002
+    )
+    If Not "N!OriginString:sex=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:redtube=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:xnxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xhamster=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+	Start !OriginString!
+	modules\0.0.4.bat -LoadModule
 )
 If Not "N!OriginString:.com=!"=="N!OriginString!" (
     :: URL contains .com
-    Echo URL contains .com [Https]
-    Pause>Nul
-    Exit
+    If Not "N!OriginString:porn=!"=="N!OriginString!" (
+        ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:download=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0002
+    )
+    If Not "N!OriginString:sex=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:redtube=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:xnxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xhamster=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+	Start !OriginString!
+	modules\0.0.4.bat -LoadModule
 )
 If Not "N!OriginString:.co.uk=!"=="N!OriginString!" (
     :: URL contains .co.uk
-    Echo URL contains .co.uk [Https]
-    Pause>Nul
-    Exit
+    If Not "N!OriginString:porn=!"=="N!OriginString!" (
+        ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:download=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0002
+    )
+    If Not "N!OriginString:sex=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:redtube=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:xnxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xhamster=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+	Start !OriginString!
+	modules\0.0.4.bat -LoadModule
 )
 If Not "N!OriginString:.co=!"=="N!OriginString!" (
     :: URL contains .co
-    Echo URL contains .co [Https]
-    Pause>Nul
-    Exit
+    If Not "N!OriginString:porn=!"=="N!OriginString!" (
+        ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:download=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0002
+    )
+    If Not "N!OriginString:sex=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:redtube=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0001
+    )
+    If Not "N!OriginString:xnxx=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+    If Not "N!OriginString:xhamster=!"=="N!OriginString!" (
+		ErrHndlr.bat -Warn NW00_BD00_0003
+    )
+	Start !OriginString!
+	modules\0.0.4.bat -LoadModule
 )
 :: URL is not known by the HttpsCheck
-Echo URL is unknown by HttpsCheck
-Pause>Nul
-Exit
+ErrHndlr.bat -Warn NW00_UKN0_0010

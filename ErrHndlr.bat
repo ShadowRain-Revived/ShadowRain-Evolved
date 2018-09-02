@@ -33,6 +33,11 @@ If "%1"=="-Warn" If "%2"=="USER_CT00_1800" Goto UserSystem_User_Contains_BadCont
 If "%1"=="-Warn" If "%2"=="USER_PW00_NM00" Goto UserSystem_Pass_NoMatch
 :: System Related Errors
 If "%1"=="-Error" If "%2"=="SRST_0000_0000" Goto System_Version_IsNull
+:: Network Related Errors
+If "%1"=="-Warn" If "%2"=="NW00_BD00_0001" Goto Network_BadDomain_Porn
+If "%1"=="-Warn" If "%2"=="NW00_BD00_0002" Goto Network_BadDomain_Download
+If "%1"=="-Warn" If "%2"=="NW00_BD00_0003" Goto Network_BadDomain_Sex
+If "%1"=="-Warn" If "%2"=="NW00_UKN0_0010" Goto Network_UnknownDomain
 :: Unknown Errors
 If "%1"=="-Error" If "%2"=="UKWN_9999_0000" Goto System_Unknown_Error
 Exit
@@ -200,3 +205,63 @@ Echo.
 Echo Press any key to terminate booting into ShadowRain
 Pause>Nul
 Exit
+
+:Network_BadDomain_Download
+Echo Warning : This domain contains "download" which is affiliated with virus/spyware programs, Would you like to proceed?
+Set /P Proceed="Yes/No: "
+If "!Proceed!"=="Yes" (
+	Start !OriginString!
+	Set OriginString=
+	modules\0.0.4.bat -LoadModule
+)
+If "!Proceed!"=="No" (
+	Set OriginString=
+	modules\0.0.4.bat -LoadModule
+)
+Echo Please respond Yes or No
+Goto Network_BadDomain_Download
+
+:Network_BadDomain_Porn
+Echo Warning : This domain contains "porn" which is affiliated with 18+ Content, Would you like to proceed?
+Set /P Proceed="Yes/No: "
+If "!Proceed!"=="Yes" (
+	Start !OriginString!
+	Set OriginString=
+	modules\0.0.4.bat -LoadModule
+)
+If "!Proceed!"=="No" (
+	Set OriginString=
+	modules\0.0.4.bat -LoadModule
+)
+Echo Please respond Yes or No
+Goto Network_BadDomain_Porn
+
+:Network_BadDomain_Sex
+Echo Warning : This domain contains "sex" which is affiliated with 18+ Content, Would you like to proceed?
+Set /P Proceed="Yes/No: "
+If "!Proceed!"=="Yes" (
+	Start !OriginString!
+	Set OriginString=
+	modules\0.0.4.bat -LoadModule
+)
+If "!Proceed!"=="No" (
+	Set OriginString=
+	modules\0.0.4.bat -LoadModule
+)
+Echo Please respond Yes or No
+Goto Network_BadDomain_Sex
+
+:Network_UnknownDomain
+Echo Warning : This domain isn't recognised by our firewall system, It may be risky. Would you like to proceed?
+Set /P Proceed="Yes/No: "
+If "!Proceed!"=="Yes" (
+	Start !OriginString!
+	Set OriginString=
+	modules\0.0.4.bat -LoadModule
+)
+If "!Proceed!"=="No" (
+	Set OriginString=
+	modules\0.0.4.bat -LoadModule
+)
+Echo Please respond Yes or No
+Goto Network_UnknownDomain

@@ -1,7 +1,7 @@
 @Echo off
 SetLocal EnableExtensions EnableDelayedExpansion
 If "%1"=="" Goto NO_PARAM
-If "%1"=="-z4" Goto Exec
+If "%1"=="-LoadModule" Goto RunModule
 Exit
 
 :NO_PARAM
@@ -9,11 +9,11 @@ Color 0C
 Echo -- Unable to run file - No parameter is defined, Returning to boot menu.
 Exit
 
-:Exec
-Set shadowDir=%cd%
-Cd !currentDir!>Nul
+:RunModule
+Set "shadowDir=%cd%"
+Cd "!currentDir!">Nul
 If "!User!"=="" (
-	..\ErrHndlr.bat -Error USER_NL00_0000
+	ErrHndlr.bat -Error USER_NL00_0000
 	Exit
 )
 Set Command=
@@ -24,28 +24,29 @@ Exit
 Set /P Command="<%cd%> (~)> "
 If "!Command!"=="" Goto Entry
 If "!Command!"=="""" Goto Entry
-If "!Command!"=="cls" Goto Clear
-If "!Command!"=="clear" Goto Clear
-If "!Command!"=="help" Goto Help
-If "!Command!"=="commands" Goto Help
-If "!Command!"=="refresh" Goto Refresh
-If "!Command!"=="dir" Goto Ls
-If "!Command!"=="ls" Goto Ls
 If "!Command!"=="cd" Goto Cd
-If "!Command!"=="root" Goto Root
-If "!Command!"=="time" Goto Time
-If "!Command!"=="mkdir" Goto MkDir
-If "!Command!"=="md" Goto Mkdir
-If "!Command!"=="rd" Goto Rd
-If "!Command!"=="rmdir" Goto Rd
-If "!Command!"=="color" Goto Color
-If "!Command!"=="mkfile" Goto MkFile
-If "!Command!"=="delfile" Goto DelFile
-If "!Command!"=="date" Goto Date
-If "!Command!"=="log" Goto Log
-If "!Command!"=="sysinfo" Goto SysInfo
 If "!Command!"=="chpwd" Goto PWDChange
+If "!Command!"=="clear" Goto Clear
+If "!Command!"=="cls" Goto Clear
+If "!Command!"=="color" Goto Color
+If "!Command!"=="commands" Goto Help
+If "!Command!"=="date" Goto Date
+If "!Command!"=="delfile" Goto DelFile
+If "!Command!"=="dir" Goto Ls
+If "!Command!"=="help" Goto Help
 If "!Command!"=="internet" Goto NetHandler
+If "!Command!"=="log" Goto Log
+If "!Command!"=="ls" Goto Ls
+If "!Command!"=="md" Goto Mkdir
+If "!Command!"=="mkdir" Goto Mkdir
+If "!Command!"=="mkfile" Goto MkFile
+If "!Command!"=="rd" Goto Rd
+If "!Command!"=="read" Goto ReadFile
+If "!Command!"=="refresh" Goto Refresh
+If "!Command!"=="rmdir" Goto Rd
+If "!Command!"=="root" Goto Root
+If "!Command!"=="sysinfo" Goto SysInfo
+If "!Command!"=="time" Goto Time
 Set Command=
 Goto Entry
 
@@ -53,7 +54,7 @@ Goto Entry
 Set currentDir=%cd%
 Cd !shadowDir!
 Echo Console Refreshed.
-modules\0.0.4.bat -z4
+modules\0.0.4.bat -LoadModule
 Set Command=
 
 :Ls
@@ -87,23 +88,23 @@ Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo ShadowRain Command List:
 Echo.
-Echo  - clear (Alias : cls) -- Clears the Console Window
-Echo  - refresh -- Refreshes the Console Window (For Updates - Mainly a dev command :
-Echo  - root -- Takes you to the directory of these files (If you're in another directory)
-Echo  - ls -- Shows the files in the directory
-Echo  - cd -- Allows you to change directory
-Echo  - help (Alias : commands) -- Shows this dialog
-Echo  - time -- Shows the system time
-Echo  - mkdir (Alias: md) -- Allows you to make a directory
-Echo  - rmdir (Alias: rd) -- Allows you to delete a directory
-Echo  - color -- Allows you to change the color in the console
-Echo  - mkfile -- Allows you to make a file inside a directory (must specify ext)
-Echo  - delfile -- Allows you to delete a file (must specify ext)
-Echo  - date -- Displays the system date
-Echo  - log -- Displays the system time and date
-Echo  - sysinfo -- Displays the system information
-Echo  - chpwd -- Allows you to change your password
-Echo  - internet -- Allows you to access the internet
+Echo 	- cd : Allows you to change directory (If it exists)
+Echo 	- chpwd : Allows you to change your password
+Echo 	- clear : (Alias: cls) Allows you to clear the console window
+Echo 	- color : Allows you to change the color of the console window
+Echo 	- date : Allows you to see the system date
+Echo 	- delfile : Allows you to delete a file (Must specify extention)
+Echo 	- dir : (Alias: ls) Allows you to see the directory you are in
+Echo 	- help  (Alias: commands) Shows you this command dialog
+Echo 	- internet : Allows you to access the internet (Opens default browser)
+Echo 	- log : Allows you see both the date and time
+Echo 	- mkdir : (Alias: md) Allows you to make a directory
+Echo 	- mkfile : Allows you to make a file inside of a directory (Must specify extention)
+Echo 	- read : Allows you to read the contents of a document or file
+Echo 	- rmdir : (Alias: rd) Allows you to delete a directory
+Echo 	- root : Takes you back to the ShadowRain directory if you are in another directory
+Echo 	- sysinfo  Shows you basic system information
+Echo 	- time : Shows you the system time
 Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
@@ -224,6 +225,20 @@ Echo.
 Set Command=
 Goto Entry
 
+:ReadFile
+Set /P ReadFile="Read which file?: "
+If Not Exist "!ReadFile!" (
+	Echo That file does not exist, Unreadable.
+	Set Command=
+	Set ReadFile=
+	Goto Entry
+)
+If Exist "!ReadFile!" (
+	Write !ReadFile!
+	Set ReadFile=
+	Set Command=
+	Goto Entry
+)
 :PWDChange
 UacSys.bat -chpwd
 Set Command=
@@ -232,19 +247,19 @@ Goto Entry
 :NetHandler
 :: Ignore this function, It is for testing only
 Set /P NetSrc="URL?: "
-Set OriginString=!NetSrc!
+Set "OriginString=!NetSrc!"
 If Not "N!NetSrc:http://=!"=="N!NetSrc!" (
 	:: Echo String Contains http://
-	NetHndlr.bat -http -check
+	NetHndlr.bat -Http -CheckString
 	Set Command=
 	Goto Entry
 )
 If Not "N!NetSrc:https://=!"=="N!NetSrc!" (
 	:: Echo String Contains https://
-	NetHndlr.bat -https -check
+	NetHndlr.bat -Https -CheckString
 	Set Command=
 	Goto Entry
 )
-Echo String neither contains http:// or https:// (Would be invalid)
+Echo "!NetSrc!" is not a valid website, Run the command and try again.
 Set Command=
 Goto Entry
