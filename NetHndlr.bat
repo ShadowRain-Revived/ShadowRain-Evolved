@@ -11,6 +11,9 @@ Echo -- Unable to run file - No parameter is defined, Returning to boot menu.
 Exit
 
 :HttpCheck
+If "!User!"=="" (
+	Goto NO_PARAM
+)
 :: Common FQDN Check
 If Not "N!OriginString:.net=!"=="N!OriginString!" (
     :: URL contains .net
@@ -120,6 +123,9 @@ If Not "N!OriginString:.co=!"=="N!OriginString!" (
 ErrHndlr.bat -Warn NW00_UKN0_0010
 
 :HttpsCheck
+If "!User!"=="" (
+	Goto NO_PARAM
+)
 :: ShadowRain domain should be the first to actually function for update commands (Website down)
 :: If Not "N!OriginString:update.shadowrain-revived.net=!"=="N!OriginString!" (
     :: Start https://update.shadowrain-revived.net/

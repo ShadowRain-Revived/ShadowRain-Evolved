@@ -66,7 +66,7 @@ Exit
 Title ShadowRain - System [Version : 0.0.4] [Logged into system as : !User!]
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
-Echo -- Press any key to boot into ShadowRain - Version 0.0.4 (Build Date: Unknown) --
+Echo -- Press any key to boot into ShadowRain - Version 0.0.4 (Build Date: 02/11/18) --
 Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Pause>Nul

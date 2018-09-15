@@ -10,6 +10,7 @@ Echo -- Unable to run file - No parameter is defined, Returning to boot menu.
 Exit
 
 :RunModule
+Set "count=0"
 Set "shadowDir=%cd%"
 Cd "!currentDir!">Nul
 If "!User!"=="" (
@@ -28,7 +29,7 @@ If "!Command!"=="cd" Goto Cd
 If "!Command!"=="chpwd" Goto PWDChange
 If "!Command!"=="clear" Goto Clear
 If "!Command!"=="cls" Goto Clear
-If "!Command!"=="color" Goto Color
+:: If "!Command!"=="color" Goto Color
 If "!Command!"=="commands" Goto Help
 If "!Command!"=="date" Goto Date
 If "!Command!"=="delfile" Goto DelFile
@@ -38,8 +39,8 @@ If "!Command!"=="help" Goto Help
 If "!Command!"=="internet" Goto NetHandler
 If "!Command!"=="log" Goto Log
 If "!Command!"=="ls" Goto Ls
-If "!Command!"=="md" Goto Mkdir
-If "!Command!"=="mkdir" Goto Mkdir
+:: If "!Command!"=="md" Goto Mkdir
+:: If "!Command!"=="mkdir" Goto Mkdir
 If "!Command!"=="mkfile" Goto MkFile
 If "!Command!"=="rd" Goto Rd
 If "!Command!"=="read" Goto ReadFile
@@ -48,6 +49,13 @@ If "!Command!"=="rmdir" Goto Rd
 If "!Command!"=="root" Goto Root
 If "!Command!"=="sysinfo" Goto SysInfo
 If "!Command!"=="time" Goto Time
+For %%a In (!Command!) Do (
+	Set /A count+=1
+	Set Value!count!=%%a
+)
+If "!Value1!"=="color" Goto Color
+If "!Value1!"=="md" Goto Mkdir
+If "!Value1!"=="mkdir" Goto Mkdir
 Set Command=
 Goto Entry
 
@@ -55,6 +63,7 @@ Goto Entry
 Set currentDir=%cd%
 Cd !shadowDir!
 Echo Console Refreshed.
+EndLocal
 modules\0.0.4.bat -LoadModule
 Set Command=
 
@@ -118,11 +127,22 @@ Set Command=
 Goto Entry
 
 :MkDir
-Set /P Dir="Name your desired directory: "
-Mkdir "!Dir!"
-Echo '!Dir!' has been made.
+If "!Value2!"=="" (
+	Echo.
+	Echo Please specifiy what directory to make.
+	Set Command=
+	Goto Loop
+)
+If Exist "!Value2!" (
+	Echo.
+	Echo This directory already exists.
+	Set Command=
+	Goto Loop
+)
+Mkdir "!Value2!"
+Echo '!Value2!' has been made.
 Set Command=
-Goto Entry
+Goto Loop
 
 :RD
 Set /P REDIR="Which directory do you wish to delete?: "
@@ -143,26 +163,90 @@ Set Command=
 Goto Entry
 
 :Color
-Echo.
-Echo 0 = Black       8 = Gray
-Echo 1 = Blue        9 = Light Blue
-Echo 2 = Green       A = Light Green
-Echo 3 = Aqua        B = Light Aqua
-Echo 4 = Red         C = Light Red
-Echo 5 = Purple      D = Light Purple
-Echo 6 = Yellow      E = Light Yellow
-Echo 7 = White       F = Bright White
-Echo.
-Set /P Col="Pick a color: "
-Color !Col!
+If "!Value2!"=="" (
+	Echo.
+	Echo 0 = Black       8 = Gray
+	Echo 1 = Blue        9 = Light Blue
+	Echo 2 = Green       A = Light Green
+	Echo 3 = Aqua        B = Light Aqua
+	Echo 4 = Red         C = Light Red
+	Echo 5 = Purple      D = Light Purple
+	Echo 6 = Yellow      E = Light Yellow
+	Echo 7 = White       F = Bright White
+	Echo.
+	Echo Pick a color from the above, and run the command again. Or run "color reset" to return to default.
+)
+If "!Value2!"=="0" (
+	Color 0
+)
+If "!Value2!"=="1" (
+	Color 1
+)
+If "!Value2!"=="2" (
+	Color 2
+)
+If "!Value2!"=="3" (
+	Color 3
+)
+If "!Value2!"=="4" (
+	Color 4
+)
+If "!Value2!"=="5" (
+	Color 5
+)
+If "!Value2!"=="6" (
+	Color 6
+)
+If "!Value2!"=="7" (
+	Color 7
+)
+If "!Value2!"=="8" (
+	Color 8
+)
+If "!Value2!"=="9" (
+	Color 9
+)
+If "!Value2!"=="a" Set "Value2=A" && Goto Color
+If "!Value2!"=="A" (
+	Color A
+)
+If "!Value2!"=="b" Set "Value2=B" && Goto Color
+If "!Value2!"=="B" (
+	Color B
+)
+If "!Value2!"=="c" Set "Value2=C" && Goto Color
+If "!Value2!"=="C" (
+	Color C
+)
+If "!Value2!"=="d" Set "Value2=D" && Goto Color
+If "!Value2!"=="D" (
+	Color D
+)
+If "!Value2!"=="e" Set "Value2=E" && Goto Color
+If "!Value2!"=="E" (
+	Color E
+)
+If "!Value2!"=="f" Set "Value2=F" && Goto Color
+If "!Value2!"=="F" (
+	Color F
+)
+If "!Value2!"=="reset" (
+	Color 0D
+)
 Set Command=
-Goto Entry
+Goto Loop
+
+:Loop
+Set currentDir=%cd%
+Cd !shadowDir!
+EndLocal
+modules\0.0.4.bat -LoadModule
+Set Command=
 
 :MkFile
 Set /P Title="Enter a title for your file (Specify ext): "
 Set /P Text="Write your text here: "
-If Exist "!Title!" Echo This file already exists.
-    
+If Exist "!Title!" Echo This file already exists.   
 If Not Exist "!Title!" (
 	Echo "!Text!" > "!Title!"
 	Echo '!Title!' has been created.
@@ -216,10 +300,10 @@ Goto Entry
 Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo You are currently logged in as "!User!"
-Echo Version: [ 0.0.4 ] - Release: [ Alpha ]
+Echo Version: [ 0.0.4 ] - Release: [ Beta ]
 Echo System Process ID: !SystemProcessID!
 Echo.
-Echo Check for new updates here: [ https://github.com/ShadowRain-Revived/ShadowRain ] 
+Echo Check for new updates here: [ https://github.com/ShadowRain-Revived/ShadowRain-Evolved ] 
 Echo For information join: [ https://discord.gg/VqjdxdE ]
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
