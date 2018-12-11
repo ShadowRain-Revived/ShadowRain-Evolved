@@ -126,14 +126,12 @@ ErrHndlr.bat -Warn NW00_UKN0_0010
 If "!User!"=="" (
 	Goto NO_PARAM
 )
-:: ShadowRain domain should be the first to actually function for update commands (Website down)
-:: If Not "N!OriginString:update.shadowrain-revived.net=!"=="N!OriginString!" (
-    :: Start https://update.shadowrain-revived.net/
-    :: This is debugging
-    :: Echo Started browser and opened !OriginString! ...
-    :: Set OriginString=
-    :: modules\0.0.4.bat -LoadModule
-:: )
+:: ShadowRain domain should be the first to actually function
+If Not "N!OriginString:shadowrain-revived.net=!"=="N!OriginString!" (
+	Start https://shadowrain-revived.net/
+    Set OriginString=
+    modules\0.0.4.bat -LoadModule
+)
 :: GOV domains should always be Https
 If Not "N!OriginString:.gov=!"=="N!OriginString!" (
     :: URL contains .gov
