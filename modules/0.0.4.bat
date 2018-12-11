@@ -107,7 +107,7 @@ Echo 	- help  (Alias: commands) Shows you this command dialog
 Echo 	- internet : Allows you to access the internet (Opens default browser)
 Echo 	- log : Allows you see both the date and time
 Echo 	- mkdir : (Alias: md) Allows you to make a directory
-Echo 	- mkfile : Allows you to make a file inside of a directory (Must specify extention) (Enclose content with " ")
+Echo 	- mkfile : Allows you to make a file inside of a directory (Must specify file extention)
 Echo 	- read : Allows you to read the contents of a document or file
 Echo 	- rmdir : (Alias: rd) Allows you to delete a directory
 Echo 	- root : Takes you back to the ShadowRain directory if you are in another directory
