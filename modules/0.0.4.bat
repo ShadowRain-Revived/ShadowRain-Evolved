@@ -29,26 +29,19 @@ If "!Command!"=="cd" Goto Cd
 If "!Command!"=="chpwd" Goto PWDChange
 If "!Command!"=="clear" Goto Clear
 If "!Command!"=="cls" Goto Clear
-:: If "!Command!"=="color" Goto Color
 If "!Command!"=="commands" Goto Help
 If "!Command!"=="date" Goto Date
-If "!Command!"=="delfile" Goto DelFile
 If "!Command!"=="dir" Goto Ls
 If "!Command!"=="directexec" Goto DirectExec
 If "!Command!"=="help" Goto Help
 If "!Command!"=="internet" Goto NetHandler
 If "!Command!"=="log" Goto Log
 If "!Command!"=="ls" Goto Ls
-:: If "!Command!"=="md" Goto Mkdir
-:: If "!Command!"=="mkdir" Goto Mkdir
-If "!Command!"=="mkfile" Goto MkFile
-If "!Command!"=="rd" Goto Rd
-If "!Command!"=="read" Goto ReadFile
 If "!Command!"=="refresh" Goto Refresh
-If "!Command!"=="rmdir" Goto Rd
 If "!Command!"=="root" Goto Root
 If "!Command!"=="sysinfo" Goto SysInfo
 If "!Command!"=="time" Goto Time
+If "!Command!"=="update" Goto Update
 For %%a In (!Command!) Do (
 	Set /A count+=1
 	Set Value!count!=%%a
@@ -56,6 +49,11 @@ For %%a In (!Command!) Do (
 If "!Value1!"=="color" Goto Color
 If "!Value1!"=="md" Goto Mkdir
 If "!Value1!"=="mkdir" Goto Mkdir
+If "!Value1!"=="rd" Goto Rd
+If "!Value1!"=="rmdir" Goto Rd
+If "!Value1!"=="delfile" Goto DelFile
+If "!Value1!"=="mkfile" Goto MkFile 
+If "!Value1!"=="read" Goto ReadFile
 Set Command=
 Goto Entry
 
@@ -109,7 +107,7 @@ Echo 	- help  (Alias: commands) Shows you this command dialog
 Echo 	- internet : Allows you to access the internet (Opens default browser)
 Echo 	- log : Allows you see both the date and time
 Echo 	- mkdir : (Alias: md) Allows you to make a directory
-Echo 	- mkfile : Allows you to make a file inside of a directory (Must specify extention)
+Echo 	- mkfile : Allows you to make a file inside of a directory (Must specify extention) (Enclose content with " ")
 Echo 	- read : Allows you to read the contents of a document or file
 Echo 	- rmdir : (Alias: rd) Allows you to delete a directory
 Echo 	- root : Takes you back to the ShadowRain directory if you are in another directory
@@ -145,22 +143,36 @@ Set Command=
 Goto Loop
 
 :RD
-Set /P REDIR="Which directory do you wish to delete?: "
-If Not Exist "!reDir!" (
+If Not Exist "!Value2!" (
 	Echo This directory does not exist.
 	Set Command=
-	Goto Entry
+	Goto Loop
 )
-Set /P Confirm="Are you sure you want to delete '!reDir!?' (yes/no): "
-If "!Confirm!"=="yes" (
-	Rd /S /Q "!reDir!"
-	Echo '!reDir!' has been deleted.
+If "!Value3!"=="auto" (
+	Echo '!Value2!' has been deleted.
+	Rd /S /Q "!Value2!"
+	Set Command=
+	Goto Loop
 )
-If Not "!Confirm!"=="yes" If Not "!Confirm!"=="no" (
+Set /P "DeleteDir=Are you sure you wish to delete '!Value2!' (yes/no)? "
+If "!DeleteDir!"=="yes" (
+	Rd /S /Q "!Value2!"
+	Echo '!Value2!' has been deleted.
+	Set Command=
+	Goto Loop
+)
+If "!DeleteDir!"=="no" (
+	Echo '!Value2!' was kept.
+	Set Command=
+	Goto Loop
+)
+If Not "!DeleteDir!"=="yes" If Not "!DeleteDir!"=="no" (
 	Echo Please answer yes or no only.
+	Set Command=
+	Goto Loop
 )
 Set Command=
-Goto Entry
+Goto Loop
 
 :Color
 If "!Value2!"=="" (
@@ -244,45 +256,66 @@ modules\0.0.4.bat -LoadModule
 Set Command=
 
 :MkFile
-Set /P Title="Enter a title for your file (Specify ext): "
-Set /P Text="Write your text here: "
-If Exist "!Title!" Echo This file already exists.   
-If Not Exist "!Title!" (
-	Echo "!Text!" > "!Title!"
-	Echo '!Title!' has been created.
+If "!Value2!"=="" (
+	Echo Please specify a file to create.
+	Set Command=
+	Goto Loop
+)
+If Exist "!Value2!" (
+	Echo '!Value2!' already exists as a file.
+	Set Command=
+	Goto Loop
+)
+Set "Title=!Value2!"
+Set /P "Text=What content do you wish to write to '!Title!'?: "  
+If Not Exist "!Value2!" (
+	Echo !Text! > "!Title!"
+	Echo '!Title!' has been created with content: '!Text!'.
 )
 Set Command=
-Goto Entry
+Goto Loop
 
 :DelFile
-Set /P DLFile="Which file do you want to delete?: "
-If Not Exist "!DLFile!" (
-	Echo '!DLFile!' does not exist.
+If "!Value2!"=="" (
+	Echo Please specify a file to delete.
 	Set Command=
-	Goto Entry
+	Goto Loop
 )
-If Exist "!DLFile!"\* (
-    Echo '!DLFile!' is a directory. Use mkdir
+If Not Exist "!Value2!" (
+	Echo '!Value2!' does not exist.
+	Set Command=
+	Goto Loop
+)
+If Exist "!Value2!"\* (
+    Echo '!Value2!' is a directory. Use rmdir
     Set Command=
-    Goto Entry
+    Goto Loop
 )
-Set /P Response="Do you really want to delete '!DLFile!'? (yes/no): "
-If "!Response!"=="yes" (
-	Del /Q !DLFile!
+If "!Value3!"=="auto" (
+	Echo '!Value2!' was deleted.
+	Del /Q "!Value2!"
 	Set Command=
-	Goto Entry
+	Goto Loop
+)
+Set /P "DelFile=Do you really want to delete '!Value2!'? (yes/no): "
+If "!DelFile!"=="yes" (
+	Echo '!Value2!' was deleted.
+	Del /Q "!Value2!"
+	Set Command=
+	Goto Loop
 )  
-If "!Response!"=="no" (
+If "!DelFile!"=="no" (
+	Echo '!Value2!' was kept.
 	Set Command=
-	Goto Entry
+	Goto Loop
 )
-If Not "!Response!"=="yes" If Not "!Response!"=="no" (
+If Not "!DelFile!"=="yes" If Not "!DelFile!"=="no" (
 	Echo Please answer yes or no only.
 	Set Command=
-	Goto Entry
+	Goto Loop
 )
 Set Command=
-Goto Entry
+Goto Loop
 
 :Date
 Echo Today's date is [%Date%]
@@ -311,19 +344,24 @@ Set Command=
 Goto Entry
 
 :ReadFile
-Set /P ReadFile="Read which file?: "
-If Not Exist "!ReadFile!" (
-	Echo That file does not exist, Unreadable.
+If "!Value2!"=="" (
+	Echo Please specify a file to read.
 	Set Command=
-	Set ReadFile=
-	Goto Entry
+	Goto Loop
 )
-If Exist "!ReadFile!" (
-	Write !ReadFile!
+If Not Exist "!Value2!" (
+	Echo That file does not exist or is unreadable.
+	Set Command=
+	Goto Loop
+)
+If Exist "!Value2!" (
+	Type !Value2!
 	Set ReadFile=
 	Set Command=
-	Goto Entry
+	Goto Loop
 )
+Goto Loop
+
 :PWDChange
 UacSys.bat -chpwd
 Set Command=
@@ -346,6 +384,11 @@ If Not "N!NetSrc:https://=!"=="N!NetSrc!" (
 	Goto Entry
 )
 Echo "!NetSrc!" is not a valid website, Run the command and try again.
+Set Command=
+Goto Entry
+
+:Update
+Start https://update.shadowrain-revived.net/?version=!Version!
 Set Command=
 Goto Entry
 
