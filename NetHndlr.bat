@@ -14,6 +14,7 @@ Exit
 If "!User!"=="" (
 	Goto NO_PARAM
 )
+
 :: Common FQDN Check
 If Not "N!OriginString:.net=!"=="N!OriginString!" (
     :: URL contains .net
@@ -41,6 +42,7 @@ If Not "N!OriginString:.net=!"=="N!OriginString!" (
 	Start !OriginString!
 	modules\0.0.4.bat -LoadModule
 )
+
 If Not "N!OriginString:.com=!"=="N!OriginString!" (
     :: URL contains .com
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
@@ -67,6 +69,7 @@ If Not "N!OriginString:.com=!"=="N!OriginString!" (
 	Start !OriginString!
 	modules\0.0.4.bat -LoadModule
 )
+
 If Not "N!OriginString:.co.uk=!"=="N!OriginString!" (
     :: URL contains .co.uk
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
@@ -93,6 +96,7 @@ If Not "N!OriginString:.co.uk=!"=="N!OriginString!" (
     Start !OriginString!
 	modules\0.0.4.bat -LoadModule
 )
+
 If Not "N!OriginString:.co=!"=="N!OriginString!" (
     :: URL contains .co
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
@@ -119,6 +123,7 @@ If Not "N!OriginString:.co=!"=="N!OriginString!" (
     Start !OriginString!
 	modules\0.0.4.bat -LoadModule
 )
+
 :: URL is not known by the HttpCheck
 ErrHndlr.bat -Warn NW00_UKN0_0010
 
@@ -126,12 +131,14 @@ ErrHndlr.bat -Warn NW00_UKN0_0010
 If "!User!"=="" (
 	Goto NO_PARAM
 )
+
 :: ShadowRain domain should be the first to actually function
 If Not "N!OriginString:shadowrain-revived.net=!"=="N!OriginString!" (
 	Start https://shadowrain-revived.net/
     Set OriginString=
     modules\0.0.4.bat -LoadModule
 )
+
 :: GOV domains should always be Https
 If Not "N!OriginString:.gov=!"=="N!OriginString!" (
     :: URL contains .gov
@@ -159,6 +166,7 @@ If Not "N!OriginString:.gov=!"=="N!OriginString!" (
 	Start !OriginString!
 	modules\0.0.4.bat -LoadModule
 )
+
 If Not "N!OriginString:.net=!"=="N!OriginString!" (
     :: URL contains .net
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
@@ -185,6 +193,7 @@ If Not "N!OriginString:.net=!"=="N!OriginString!" (
 	Start !OriginString!
 	modules\0.0.4.bat -LoadModule
 )
+
 If Not "N!OriginString:.com=!"=="N!OriginString!" (
     :: URL contains .com
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
@@ -211,6 +220,7 @@ If Not "N!OriginString:.com=!"=="N!OriginString!" (
 	Start !OriginString!
 	modules\0.0.4.bat -LoadModule
 )
+
 If Not "N!OriginString:.co.uk=!"=="N!OriginString!" (
     :: URL contains .co.uk
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
@@ -237,6 +247,7 @@ If Not "N!OriginString:.co.uk=!"=="N!OriginString!" (
 	Start !OriginString!
 	modules\0.0.4.bat -LoadModule
 )
+
 If Not "N!OriginString:.co=!"=="N!OriginString!" (
     :: URL contains .co
     If Not "N!OriginString:porn=!"=="N!OriginString!" (
@@ -263,5 +274,6 @@ If Not "N!OriginString:.co=!"=="N!OriginString!" (
 	Start !OriginString!
 	modules\0.0.4.bat -LoadModule
 )
+
 :: URL is not known by the HttpsCheck
 ErrHndlr.bat -Warn NW00_UKN0_0010
