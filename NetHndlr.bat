@@ -15,6 +15,13 @@ If "!User!"=="" (
 	Goto NO_PARAM
 )
 
+:: ShadowRain domain should be the first to actually function
+If Not "N!OriginString:shadowrain-revived.net=!"=="N!OriginString!" (
+	Start http://shadowrain-revived.net/
+    Set OriginString=
+    modules\0.0.4.bat -LoadModule
+)
+
 :: Common FQDN Check
 If Not "N!OriginString:.net=!"=="N!OriginString!" (
     :: URL contains .net
@@ -130,13 +137,6 @@ ErrHndlr.bat -Warn NW00_UKN0_0010
 :HttpsCheck
 If "!User!"=="" (
 	Goto NO_PARAM
-)
-
-:: ShadowRain domain should be the first to actually function
-If Not "N!OriginString:shadowrain-revived.net=!"=="N!OriginString!" (
-	Start https://shadowrain-revived.net/
-    Set OriginString=
-    modules\0.0.4.bat -LoadModule
 )
 
 :: GOV domains should always be Https
