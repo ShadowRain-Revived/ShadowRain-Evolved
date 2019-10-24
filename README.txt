@@ -21,3 +21,10 @@ Each File Serves a different function, Of which can be edited to customize Shado
 - UacSys.bat -> Handles User Authentication (Uac = User Authentication Control)
 	(This handles data input/output to Encdec.bat and user creation, etc)
 ===========================================================================================================
+System Support List:
+	- Windows 10: 0.0.1, 0.0.2, 0.0.3, 0.0.4
+	- Windows 8 : 0.0.1, 0.0.2, 0.0.3, 0.0.4
+	- Windows 7 : 0.0.1, 0.0.2, 0.0.3, 0.0.4
+	- Windows XP: 0.0.1, 0.0.2, 0.0.3, 0.0.4
+	- React OS  : 0.0.1, 0.0.2
+===========================================================================================================
