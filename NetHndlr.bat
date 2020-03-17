@@ -17,9 +17,9 @@ If "!User!"=="" (
 
 :: ShadowRain domain should be the first to actually function
 If Not "N!OriginString:shadowrain-revived.net=!"=="N!OriginString!" (
-	Start http://shadowrain-revived.net/
-    Set OriginString=
-    modules\0.0.4.bat -LoadModule
+	Start https://shadowrain-revived.net/
+	Set OriginString=
+	modules\0.0.4.bat -LoadModule
 )
 
 :: Common FQDN Check
