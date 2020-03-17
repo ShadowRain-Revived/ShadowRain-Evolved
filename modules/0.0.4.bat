@@ -388,7 +388,7 @@ Set Command=
 Goto Entry
 
 :Update
-Start http://update.shadowrain-revived.net/?version=!Version!
+Start https://update.shadowrain-revived.net/?version=!Version!
 Set Command=
 Goto Entry
 
