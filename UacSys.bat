@@ -6,7 +6,8 @@ If "%1"=="-LoginVersion" If "%2"=="0.0.3" Goto Login
 If "%1"=="-LoginVersion" If "%2"=="0.0.4" Goto Login
 :: User Things (Make_User : Line 38) 
 If "%1"=="-MakeUser" Goto Make_User
-If "%1"=="-ChangePassword" Goto Change_Password
+:: doesnt exist
+:: If "%1"=="-ChangePassword" Goto Change_Password
 :: Authentication Things
 If "%1"=="-Authenticate" If "%2"=="!CheckedPass!" Goto Authenticated_User
 ErrHndlr.bat -Error UKWN_9999_0000
