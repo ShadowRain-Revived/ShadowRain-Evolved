@@ -96,7 +96,6 @@ Echo :::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo ShadowRain Command List:
 Echo.
 Echo 	- cd : Allows you to change directory (If it exists)
-Echo 	- chpwd : Allows you to change your password
 Echo 	- clear : (Alias: cls) Allows you to clear the console window
 Echo 	- color : Allows you to change the color of the console window
 Echo 	- date : Allows you to see the system date
