@@ -26,7 +26,6 @@ Set /P Command="<%cd%> (~)> "
 If "!Command!"=="" Goto Entry
 If "!Command!"=="""" Goto Entry
 If "!Command!"=="cd" Goto Cd
-If "!Command!"=="chpwd" Goto PWDChange
 If "!Command!"=="clear" Goto Clear
 If "!Command!"=="cls" Goto Clear
 If "!Command!"=="commands" Goto Help
@@ -361,11 +360,6 @@ If Exist "!Value2!" (
 	Goto Loop
 )
 Goto Loop
-
-:PWDChange
-UacSys.bat -chpwd
-Set Command=
-Goto Entry
 
 :NetHandler
 :: Ignore this function, It is for testing only
