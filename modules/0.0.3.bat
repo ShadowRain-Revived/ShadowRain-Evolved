@@ -44,7 +44,6 @@ If "!Command!"=="delfile" Goto DelFile
 If "!Command!"=="date" Goto Date
 If "!Command!"=="log" Goto Log
 If "!Command!"=="sysinfo" Goto SysInfo
-If "!Command!"=="chpwd" Goto PWDChange
 Set Command=
 Goto Entry
 
@@ -101,7 +100,6 @@ Echo  - delfile -- Allows you to delete a file (must specify ext)
 Echo  - date -- Displays the system date
 Echo  - log -- Displays the system time and date
 Echo  - sysinfo -- Displays the system information
-Echo  - chpwd -- Allows you to change your password
 Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
@@ -218,10 +216,5 @@ Echo New updates here: [ https://github.com/ShadowRain-Revived/ShadowRain ]
 Echo For information join: [ https://discord.gg/VqjdxdE ]
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
-Set Command=
-Goto Entry
-
-:PWDChange
-UacSys.bat -chpwd
 Set Command=
 Goto Entry
