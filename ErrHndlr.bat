@@ -85,7 +85,6 @@ Exit
 :CoreFile_Module_Missing
 Color 0C
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-If "!Version!"=="0.0.1" Echo Error : File Missing - modules\0.0.1.bat
 If "!Version!"=="0.0.2" Echo Error : File Missing - modules\0.0.2.bat
 If "!Version!"=="0.0.3" Echo Error : File Missing - modules\0.0.3.bat
 If "!Version!"=="0.0.4" Echo Error : File Missing - modules\0.0.4.bat

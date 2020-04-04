@@ -1,7 +1,6 @@
 @Echo off
 SetLocal EnableExtensions EnableDelayedExpansion
 If "%1"=="" Goto NO_PARAM
-If "%1"=="-Version" If "%2"=="0.0.1" Goto System_Boot
 If "%1"=="-Version" If "%2"=="0.0.2" Goto System_Boot
 If "%1"=="-Version" If "%2"=="0.0.3" Goto System_Boot
 If "%1"=="-Version" If "%2"=="0.0.4" Goto System_Boot
@@ -17,23 +16,9 @@ Exit
 :System_Boot
 Cls
 Title ShadowRain - System
-If "%2"=="0.0.1" Goto 0.0.1
 If "%2"=="0.0.2" Goto 0.0.2
 If "%2"=="0.0.3" UacSys.bat -LoginVersion 0.0.3
 If "%2"=="0.0.4" UacSys.bat -LoginVersion 0.0.4
-Exit
-
-:0.0.1
-Title ShadowRain - System [Version : 0.0.1]
-Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Echo.
-Echo -- Press any key to boot into ShadowRain - Version 0.0.1 (Build Date: 09/08/17) --
-Echo.
-Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-Pause>Nul
-Echo.
-Echo.
-CommandEngine.bat -v 0.0.1
 Exit
 
 :0.0.2
@@ -66,7 +51,7 @@ Exit
 Title ShadowRain - System [Version : 0.0.4] [Logged into system as : !User!]
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Echo.
-Echo -- Press any key to boot into ShadowRain - Version 0.0.4 (Build Date: 02/11/18) --
+Echo -- Press any key to boot into ShadowRain - Version 0.0.4 R2 (Build Date: 04/04/20) --
 Echo.
 Echo ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 Pause>Nul
