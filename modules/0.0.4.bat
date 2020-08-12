@@ -25,7 +25,6 @@ Exit
 Set /P Command="<%cd%> (~)> "
 If "!Command!"=="" Goto Entry
 If "!Command!"=="""" Goto Entry
-:: If "!Command!"=="cd" Goto Cd
 If "!Command!"=="clear" Goto Clear
 If "!Command!"=="cls" Goto Clear
 If "!Command!"=="commands" Goto Help
