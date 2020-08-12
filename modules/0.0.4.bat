@@ -25,7 +25,7 @@ Exit
 Set /P Command="<%cd%> (~)> "
 If "!Command!"=="" Goto Entry
 If "!Command!"=="""" Goto Entry
-If "!Command!"=="cd" Goto Cd
+:: If "!Command!"=="cd" Goto Cd
 If "!Command!"=="clear" Goto Clear
 If "!Command!"=="cls" Goto Clear
 If "!Command!"=="commands" Goto Help
@@ -45,6 +45,7 @@ For %%a In (!Command!) Do (
 	Set /A count+=1
 	Set Value!count!=%%a
 )
+If "!Value1!"=="cd" Goto Cd
 If "!Value1!"=="color" Goto Color
 If "!Value1!"=="md" Goto Mkdir
 If "!Value1!"=="mkdir" Goto Mkdir
@@ -70,14 +71,14 @@ Set Command=
 Goto Entry
 
 :Cd
-Set /P Directory="What directory? "
-If Not Exist "!Directory!" (
+If Not Exist "!Value2!" (
 	Echo This Directory does not exist.
 	Set Command=
 	Goto Entry
 )
-Cd "!Directory!"
+EndLocal & Pushd "%Value2%"
 Set Command=
+SetLocal EnableExtensions EnableDelayedExpansion
 Goto Entry
 
 :Root
