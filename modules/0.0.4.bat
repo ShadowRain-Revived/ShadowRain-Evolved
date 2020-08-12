@@ -12,7 +12,8 @@ Exit
 :RunModule
 Set "count=0"
 Set "shadowDir=%cd%"
-Cd "!currentDir!">Nul
+Endlocal & Pushd "%currentDir%">Nul
+SetLocal EnableExtensions EnableDelayedExpansion
 If "!User!"=="" (
 	ErrHndlr.bat -Error USER_NL00_0000
 	Exit
@@ -78,7 +79,7 @@ If Not Exist "!Value2!" (
 EndLocal & Pushd "%Value2%"
 Set Command=
 SetLocal EnableExtensions EnableDelayedExpansion
-Goto Entry
+Goto Loop
 
 :Root
 Cd !shadowDir!
