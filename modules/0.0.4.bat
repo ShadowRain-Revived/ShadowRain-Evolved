@@ -41,6 +41,7 @@ If "!Command!"=="root" Goto Root
 If "!Command!"=="sysinfo" Goto SysInfo
 If "!Command!"=="time" Goto Time
 If "!Command!"=="update" Goto Update
+If "!Command!"=="secret" Goto Secret
 For %%a In (!Command!) Do (
 	Set /A count+=1
 	Set Value!count!=%%a
@@ -389,3 +390,13 @@ Goto Entry
 :DirectExec
 Set /P DirectCommand="Command?: "
 !DirectCommand! && modules\0.0.4.bat -LoadModule
+
+:Secret
+Echo.
+Echo If you found this command, this was added a year after the last update (12/8/20 - 12/8/21)
+Echo Unfortunately during Covid, developers have been unavaliable, or busy, or having declining mental health
+Echo.
+Echo Our thoughts go out to others affected by Covid during the past 2 years.
+Echo.
+Set Command=
+Goto Entry
