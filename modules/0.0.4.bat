@@ -42,6 +42,7 @@ If "!Command!"=="sysinfo" Goto SysInfo
 If "!Command!"=="time" Goto Time
 If "!Command!"=="update" Goto Update
 If "!Command!"=="secret" Goto Secret
+If "!Command!"=="development" Goto Development
 For %%a In (!Command!) Do (
 	Set /A count+=1
 	Set Value!count!=%%a
@@ -319,6 +320,11 @@ Goto Loop
 
 :Date
 Echo Today's date is [%Date%]
+Set Command=
+Goto Entry
+
+:Development
+Echo "development going well innit" - bow, March 1st 2022 @ 02:06 AM GMT
 Set Command=
 Goto Entry
 
